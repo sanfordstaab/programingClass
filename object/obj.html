@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        const o = {
+            key: "value",
+            "bookName": "The great gatsby",
+            "subobj": {
+                "subkey": 4,
+                "another key": "another value",
+                '1' : 56,
+            }
+        };
+        const x = o;
+        const y = JSON.parse(JSON.stringify(o));
+        x.key = "changed";
+        y.key = "also changed";
+        console.log('o=', o, '\nx=', x, '\ny=', y);
+    </script>
+</head>
+<body>
+</body>
+</html>

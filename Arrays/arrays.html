@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+  <script type="text/javascript">
+    function eh_onPageLoad(event) {
+      const a = [];
+      for (let i = 0; i < 10; i++) {
+        if (Math.random() < .5) {
+          aChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+          a[i] = aChars[ Math.floor(Math.random() * aChars.length) ];
+        } else if (Math.random() < .5) {
+          a[i] = Math.floor(Math.random() * 1000);
+        } else {
+          a[i] = (Math.random() * 1000).toFixed(3);
+        }
+      }
+      document.getElementById('divArray').innerText = a;
+      a.sort(numSort);
+      document.getElementById('divSortedArray').innerText = a;
+    }
+
+    function numSort(a, b) {
+      if (typeof(a) == 'string' || typeof(b) == 'string') {
+        if (a.toString() < b.toString()) {
+          return -1;
+        } else if (a.toString() > b.toString()) {
+          return 1;
+        }
+      } else {
+        return a - b;
+      }
+      return 0;
+    }
+  </script>
+</head>
+<body onload="eh_onPageLoad(event);">
+  <h1>Array Project</h1>
+  <div id="divArray">
+    <!-- filled in by code -->
+  </div>
+  <br>
+  <div id="divSortedArray">
+    <!-- filled in by code -->
+  </div>
+</body>
+</html>
