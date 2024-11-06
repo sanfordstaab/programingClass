@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <script type = "text/javascript">
+        function onPageLoad(event) {
+            // setInterval(tick, 1000);
+        }
+
+        function tick() {
+            const date = new Date();
+            document.getElementById('time').innerText = date.toLocaleTimeString();
+        }
+
+        function eh_click() {
+            setTimeout(tick, 4000)
+        }
+    </script>
+</head>
+<body onLoad = "onPageLoad();">
+    <h3>The Time is:</h3>
+    <span id = 'time'></span>
+    <br>
+    <button onclick = 'eh_click();'>
+        Click Me
+    </button>
+</body>
+</html>
