@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Examples</title>
+  <script type="text/javascript">
+        function eh_setticTacToe(event) {
+      document.getElementById('one').className = "ticTacToe";
+    }
+    function eh_setBigBdr(event) {
+      document.getElementById('one').className = "bigBdr";
+    }
+    function eh_setNone(event) {
+      document.getElementById('one').className = "none";
+    }    
+  </script>
+  <style type="text/css">
+    .bigBdr {
+      font-size: 24pt;
+      font-family: Arial;
+      font-weight: bold;
+      border-collapse: collapse;
+    }
+    .bigBdr td {
+      border: solid black 2px;
+      width: 2em;
+      text-align: center;
+    }
+    .ticTacToe {
+      font-size: 48pt;
+      font-family: Arial;
+      font-weight: bold;
+      border-collapse: collapse;
+    }
+    .ticTacToe td {
+      width: 2em;
+      text-align: center;
+    }
+    #c1 {
+      border-right: solid black 2px;
+      border-bottom: solid black 2px;
+    }
+    #c2 {
+      border-left: solid black 2px;
+      border-right: solid black 2px;
+      border-bottom: solid black 2px;
+    }
+    #c3 {
+      border-left: solid black 2px;
+      border-bottom: solid black 2px;
+    }    
+    #c4 {
+      border-top: solid black 2px;
+      border-right: solid black 2px;
+      border-bottom: solid black 2px;
+    }
+    #c5 {
+      border: solid black 2px;
+    }  
+    #c6 {
+      border-top: solid black 2px;
+      border-left: solid black 2px;
+      border-bottom: solid black 2px;
+    }   
+    #c7 {
+      border-top: solid black 2px;
+      border-right: solid black 2px;
+    }   
+    #c8 {
+      border-top: solid black 2px;
+      border-left: solid black 2px;
+      border-right: solid black 2px;
+    }    
+    #c9 {
+      border-top: solid black 2px;
+      border-left: solid black 2px;
+    }    
+  </style>
+</head>
+<body>
+  <h1>Table 1</h1>
+  <button onclick="eh_setBigBdr(event);">
+    Set Class to bigBdr
+  </button>
+  <button onclick="eh_setNone(event);">
+    Set Class to none
+  </button>
+  <button onclick="eh_ticTacToe(event);">
+    Set Class to Tic-Tac-Toe
+  </button>
+  <br><br>
+  <table id="one" class="none">
+    <tr>
+      <td id="c1">
+        1
+      </td>
+      <td id="c2">
+        2
+      </td>
+      <td id="c3">
+        3
+      </td>
+    </tr>
+    <tr>
+      <td id="c4">
+        4
+      </td>
+      <td id="c5">
+        5
+      </td>
+      <td id="c6">
+        6
+      </td>
+    </tr>
+    <tr>
+      <td id="c7">
+        7
+      </td>
+      <td id="c8">
+        8
+      </td>
+      <td id="c9">
+        0
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
