@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Examples</title>
+  <script type="text/javascript">
+function ge(id) {
+  return document.getElementById(id);
+}
+function eh_onCellClick(event) {
+  const cellId = event.target.id;
+  const eCell = ge(cellId);
+  if (eCell.innerText.trim() == '') {
+    eCell.innerText = 'X';
+  }
+}
+  </script>
+  <style type="text/css">
+    .bigBdr {
+      font-size: 24pt;
+      font-family: Arial;
+      font-weight: bold;
+      border-collapse: collapse;
+    }
+    .bigBdr td {
+      border: solid black 2px;
+      width: 2em;
+      text-align: center;
+    }
+    .ticTacToe {
+      font-size: 48pt;
+      font-family: Arial;
+      font-weight: bold;
+      border-collapse: collapse;
+    }
+    .ticTacToe td {
+      width: 2em;
+      text-align: center;
+    }
+    #c1 {
+      border-right: solid black 2px;
+      border-bottom: solid black 2px;
+    }
+    #c2 {
+      border-left: solid black 2px;
+      border-right: solid black 2px;
+      border-bottom: solid black 2px;
+    }
+    #c3 {
+      border-left: solid black 2px;
+      border-bottom: solid black 2px;
+    }    
+    #c4 {
+      border-top: solid black 2px;
+      border-right: solid black 2px;
+      border-bottom: solid black 2px;
+    }
+    #c5 {
+      border: solid black 2px;
+    }  
+    #c6 {
+      border-top: solid black 2px;
+      border-left: solid black 2px;
+      border-bottom: solid black 2px;
+    }   
+    #c7 {
+      border-top: solid black 2px;
+      border-right: solid black 2px;
+    }   
+    #c8 {
+      border-top: solid black 2px;
+      border-left: solid black 2px;
+      border-right: solid black 2px;
+    }    
+    #c9 {
+      border-top: solid black 2px;
+      border-left: solid black 2px;
+    }    
+  </style>
+</head>
+<body>
+  <h1>Table 1</h1>
+  <table id="one" class="ticTacToe">
+    <tr>
+      <td id="c1" onclick="eh_onCellClick(event);">
+        &nbsp;
+      </td>
+      <td id="c2" onclick="eh_onCellClick(event);">
+        &nbsp;
+      </td>
+      <td id="c3" onclick="eh_onCellClick(event);">
+        &nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td id="c4" onclick="eh_onCellClick(event);">
+        &nbsp;
+      </td>
+      <td id="c5" onclick="eh_onCellClick(event);">
+        &nbsp;
+      </td>
+      <td id="c6" onclick="eh_onCellClick(event);">
+        &nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td id="c7" onclick="eh_onCellClick(event);">
+        &nbsp;
+      </td>
+      <td id="c8" onclick="eh_onCellClick(event);">
+        &nbsp;
+      </td>
+      <td id="c9" onclick="eh_onCellClick(event);">
+        &nbsp;
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
