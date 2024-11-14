@@ -15,16 +15,34 @@ function eh_onCellClick(event) {
   const eCell = ge(cellId);
   if (eCell.innerText.trim() == '') {
     eCell.innerText = 'X';
-    if (checkForWin('X')) {
+    const nXWinner = checkForWin('X');
+    if (nXWinner) {
       ge('youWon').innerText = 'You Won!!!';
+
+      // set all winner cells to .red css class
+      for (let i = 1; i < 10; i++) {
+        const winnerBit = 0b1 << (9 - i);
+        console.log('Winner Bit: ' + winnerBit.toString(2));
+        if (winnerBit & nXWinner) {
+          const sCellId = 'c' + i.toString();
+          const elCell = ge(sCellId);
+          console.assert(elCell); // this is a good way to check for errors in your code.  Use it liberally!
+          elCell.className = 'red';
+        }
+      }
+
       setTimeout(() => {
         // this function will be called 5 seconds after the
         // You Won!!! message is shown.
         // clear any win message
         ge('youWon').innerText = '';
+
         // clear the board
         for (let i = 1; i < 10; i++) {
-          ge('c' + i.toString()).innerHTML = '&nbsp;';
+          const cellId = 'c' + i.toString();
+          const elCell = ge(cellId);
+          elCell.innerHTML = '&nbsp;';
+          elCell.className = ''; // back to black
         }
       }, 5000);
     } else {
@@ -34,7 +52,7 @@ function eh_onCellClick(event) {
 }
 
 /**
- * returns true if the given side won
+ * returns nXWinner if the given side won otherwise 0
  */
 function checkForWin(sSide = 'X') {
   let nXCells = 0b0; // binary number
@@ -77,13 +95,10 @@ function checkForWin(sSide = 'X') {
     // 1 0 1 -> a 1 results only if both inputs are 1
 
     if (fMatch) {
-      break; // winner was found
+      return nXWinner; // winner was found
     }
-
-    // TODO: Might be cool to remember which nXWinner matched so we can
-    // highlight the winner cells.
   }
-  return fMatch;
+  return 0;
 }
 
 function makeAMove() {
@@ -111,6 +126,9 @@ function makeAMove() {
     .ticTacToe td {
       width: 2em;
       text-align: center;
+    }
+    .red {
+      color: red;
     }
     #c1 {
       border-right: solid black 4px;
