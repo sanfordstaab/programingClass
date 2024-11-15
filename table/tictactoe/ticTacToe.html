@@ -17,6 +17,7 @@ function eh_onCellClick(event) {
     makeAMove();
   }
 }
+<<<<<<< HEAD
 /**
  * Returns true if there are 3 Xs in a row.
  */
@@ -66,6 +67,61 @@ function checkForWin() {
 function makeAMove() {
   
 }
+=======
+
+/**
+ * returns true if there are 3 Xs in a row
+ */
+function checkForWin() {
+  const aXCells = [];
+  for (let nCell = 1; nCell <= 9; nCell++) {
+    const cellId = 'c' + nCell.toString();
+    const eCell = ge(cellId);
+    if (eCell.innerText == 'X') {
+      aXCells.push(cellId);
+    }
+  }
+  // aCells contains all cellIds that have an X in them
+  console.log(aXCells);
+  if (aXCells.length < 3) {
+    return false;
+  }
+  const aWinners = [
+    [ 'c1', 'c2', 'c3' ], // left to right
+    [ 'c4', 'c5', 'c6' ],
+    [ 'c7', 'c8', 'c9' ],
+
+    [ 'c1', 'c4', 'c7' ], // top to bottom
+    [ 'c2', 'c5', 'c8' ],
+    [ 'c3', 'c5', 'c9' ],
+
+    [ 'c1', 'c5', 'c9' ], // diagonal 3 in a row
+    [ 'c3', 'c5', 'c7' ]
+  ];
+
+  const sCell = JSON.stringify(aXCells);
+  for (const aWinner of aWinners) {
+    let fMatch = true;
+    for (const winnerCellId of aWinner) {
+      if (!aXCells.includes(winnerCellId)) {
+        fMatch = false;
+        break;
+      }
+    }
+
+    if (fMatch) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function makeAMove() {
+
+}
+
+
+>>>>>>> refs/remotes/origin/master
   </script>
   <style type="text/css">
     .bigBdr {
@@ -90,43 +146,43 @@ function makeAMove() {
       text-align: center;
     }
     #c1 {
-      border-right: solid black 2px;
-      border-bottom: solid black 2px;
+      border-right: solid black 4px;
+      border-bottom: solid black 4px;
     }
     #c2 {
-      border-left: solid black 2px;
-      border-right: solid black 2px;
-      border-bottom: solid black 2px;
+      border-left: solid black 4px;
+      border-right: solid black 4px;
+      border-bottom: solid black 4px;
     }
     #c3 {
-      border-left: solid black 2px;
-      border-bottom: solid black 2px;
+      border-left: solid black 4px;
+      border-bottom: solid black 4px;
     }    
     #c4 {
-      border-top: solid black 2px;
-      border-right: solid black 2px;
-      border-bottom: solid black 2px;
+      border-top: solid black 4px;
+      border-right: solid black 4px;
+      border-bottom: solid black 4px;
     }
     #c5 {
-      border: solid black 2px;
+      border: solid black 4px;
     }  
     #c6 {
-      border-top: solid black 2px;
-      border-left: solid black 2px;
-      border-bottom: solid black 2px;
+      border-top: solid black 4px;
+      border-left: solid black 4px;
+      border-bottom: solid black 4px;
     }   
     #c7 {
-      border-top: solid black 2px;
-      border-right: solid black 2px;
+      border-top: solid black 4px;
+      border-right: solid black 4px;
     }   
     #c8 {
-      border-top: solid black 2px;
-      border-left: solid black 2px;
-      border-right: solid black 2px;
+      border-top: solid black 4px;
+      border-left: solid black 4px;
+      border-right: solid black 4px;
     }    
     #c9 {
-      border-top: solid black 2px;
-      border-left: solid black 2px;
+      border-top: solid black 4px;
+      border-left: solid black 4px;
     }    
   </style>
 </head>
