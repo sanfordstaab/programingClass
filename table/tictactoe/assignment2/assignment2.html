@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TicTacToe Assignment 1</title>
   <script type="text/javascript">
+// function displayMessage(message) {
+//   alert(message);
+//   document.getElementById("output").innerHTML = message;
+// }
 function ge(id) {
   return document.getElementById(id);
 }
@@ -17,6 +21,15 @@ function eh_onCellClick(event) {
     makeAMove();
   }
 }
+// function eh_onCellClick(event) {
+//   const cellId = event.target.id;
+//   const eCell = ge(cellId);
+//   if (eCell.innerText.trim() == '') {
+//     eCell.innerText = 'O';
+//     checkForLoss();
+//     makeAMove();
+//   }
+// }
 /**
  * Returns true if there are 3 Xs in a row.
  */
@@ -26,9 +39,20 @@ function checkForWin() {
       const cellId = 'c' + nCell.toString();
       const eCell = ge(cellId);
         if (eCell.innerText == 'X') {
-          aXCells.push(cellId);    
+          aXCells.push(cellId); 
+          
         }
       }
+  //     function checkForLoss() {
+  // const aXCells = [];
+  //   for (let nCell = 1; nCell <= 9; nCell++) {
+  //     const cellId = 'c' + nCell.toString();
+  //     const eCell = ge(cellId);
+  //       if (eCell.innerText == 'O') {
+  //         aXCells.push(cellId);    
+  //       }
+  //     }
+  //   }
     // aCells contains all cellIds that have a X in them
     console.log(aXCells);
     if (aXCells.length < 3) {
@@ -53,6 +77,8 @@ function checkForWin() {
       for (const winnerCellId of aWinner) {
         if (!aXCells.includes(winnerCellId)) {
           fMatch = false;
+          // displayMessage("You Win!");
+          // location.reload();
           break;
         }
       }
