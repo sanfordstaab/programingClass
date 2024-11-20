@@ -3,12 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TicTacToe Assignment 1</title>
+  <title>TicTacToe Assignment 2</title>
   <script type="text/javascript">
-// function displayMessage(message) {
-//   alert(message);
-//   document.getElementById("output").innerHTML = message;
-// }
 function ge(id) {
   return document.getElementById(id);
 }
@@ -17,84 +13,87 @@ function eh_onCellClick(event) {
   const eCell = ge(cellId);
   if (eCell.innerText.trim() == '') {
     eCell.innerText = 'X';
-    checkForWin();
-    makeAMove();
+    if (checkForWin('X')) {
+      ge('youWon').innerText = 'You Won!!!';
+      setTimeout(() => {
+        // this function will be called 5 seconds after the
+        // You Won!!! message is shown.
+        // clear any win message
+        ge('youWon').innerText = '';
+        // clear the board
+        for (let i = 1; i < 10; i++) {
+          ge('c' + i.toString()).innerHTML = '&nbsp;';
+        }
+      }, 5000);
+    } else {
+      makeAMove();
+    }
   }
 }
-// function eh_onCellClick(event) {
-//   const cellId = event.target.id;
-//   const eCell = ge(cellId);
-//   if (eCell.innerText.trim() == '') {
-//     eCell.innerText = 'O';
-//     checkForLoss();
-//     makeAMove();
-//   }
-// }
+
 /**
- * Returns true if there are 3 Xs in a row.
+ * returns if the given side won
  */
-function checkForWin() {
+function checkForWin(sSide = 'X') {
   const aXCells = [];
-    for (let nCell = 1; nCell <= 9; nCell++) {
-      const cellId = 'c' + nCell.toString();
-      const eCell = ge(cellId);
-        if (eCell.innerText == 'X') {
-          aXCells.push(cellId); 
-          
-        }
-      }
-  //     function checkForLoss() {
-  // const aXCells = [];
-  //   for (let nCell = 1; nCell <= 9; nCell++) {
-  //     const cellId = 'c' + nCell.toString();
-  //     const eCell = ge(cellId);
-  //       if (eCell.innerText == 'O') {
-  //         aXCells.push(cellId);    
-  //       }
-  //     }
-  //   }
-    // aCells contains all cellIds that have a X in them
-    console.log(aXCells);
-    if (aXCells.length < 3) {
-      return false;
+  for (let nCell = 1; nCell <= 9; nCell++) {
+    const cellId = 'c' + nCell.toString();
+    const eCell = ge(cellId);
+    if (eCell.innerText == sSide) {
+      aXCells.push(cellId);
     }
-    const aWinners = [
-      ['c1','c2','c3'], // left to right
-      ['c4','c5','c6'],
-      ['c7','c8','c9'],
+  }
+  // aCells contains all cellIds that have an X in them
+  console.log(aXCells);
+  if (aXCells.length < 3) {
+    return false;
+  }
+  const aWinners = [
+    [ 'c1', 'c2', 'c3' ], // left to right
+    [ 'c4', 'c5', 'c6' ],
+    [ 'c7', 'c8', 'c9' ],
 
-      ['c1','c4','c7'], // top to bottom
-      ['c2','c5','c8'],
-      ['c3','c5','c9'],
+    [ 'c1', 'c4', 'c7' ], // top to bottom
+    [ 'c2', 'c5', 'c8' ],
+    [ 'c3', 'c6', 'c9' ],
 
-      ['c1','c5','c9'], // diagnoal 3 in a row
-      ['c3','c5','c7'],
-    ];
+    [ 'c1', 'c5', 'c9' ], // diagonal 3 in a row
+    [ 'c3', 'c5', 'c7' ]
+  ];
 
-    const sCells = JSON.stringify(aXCells);
-    for (const aWinner of aWinners) { 
-      let fMatch = true;
-      for (const winnerCellId of aWinner) {
-        if (!aXCells.includes(winnerCellId)) {
-          fMatch = false;
-          // displayMessage("You Win!");
-          // location.reload(true);
-          break;
-        }
-      }
-      if (fMatch) {
-        return true;
+  const sCell = JSON.stringify(aXCells);
+  for (const aWinner of aWinners) {
+    let fMatch = true;
+    for (const winnerCellId of aWinner) {
+      if (!aXCells.includes(winnerCellId)) {
+        fMatch = false;
+        break;
       }
     }
-   return false;
+
+    if (fMatch) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function makeAMove() {
-  
+
 }
   </script>
   <style type="text/css">
-    
+    .bigBdr {
+      font-size: 24pt;
+      font-family: Arial;
+      font-weight: bold;
+      border-collapse: collapse;
+    }
+    .bigBdr td {
+      border: solid black 2px;
+      width: 2em;
+      text-align: center;
+    }
     .ticTacToe {
       font-size: 48pt;
       font-family: Arial;
@@ -110,31 +109,35 @@ function makeAMove() {
       border-bottom: solid black 4px;
     }
     #c2 {
-      border: solid black 4px;
-      border-top: 0px;
+      border-left: solid black 4px;
+      border-right: solid black 4px;
+      border-bottom: solid black 4px;
     }
     #c3 {
       border-left: solid black 4px;
       border-bottom: solid black 4px;
     }    
     #c4 {
-      border: solid black 4px;
-      border-left: 0px;
+      border-top: solid black 4px;
+      border-right: solid black 4px;
+      border-bottom: solid black 4px;
     }
     #c5 {
       border: solid black 4px;
     }  
     #c6 {
-      border: solid black 4px;
-      border-right: 0px;
+      border-top: solid black 4px;
+      border-left: solid black 4px;
+      border-bottom: solid black 4px;
     }   
     #c7 {
       border-top: solid black 4px;
       border-right: solid black 4px;
     }   
     #c8 {
-      border: solid black 4px;
-      border-bottom: 0px;
+      border-top: solid black 4px;
+      border-left: solid black 4px;
+      border-right: solid black 4px;
     }    
     #c9 {
       border-top: solid black 4px;
@@ -181,5 +184,6 @@ function makeAMove() {
       </tr>
     </tbody>
   </table>
+  <h1 id="youWon"></h1>
 </body>
 </html>
