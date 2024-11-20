@@ -1,6 +1,6 @@
-This is some text
-that we will do 
-merging on.
+This is some text (added this)
+that we will do (some more to add)
+Delete line below this.
 
 Should be easy
 I hope.
