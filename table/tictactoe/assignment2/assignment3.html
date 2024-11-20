@@ -15,38 +15,45 @@ function eh_onCellClick(event) {
   const eCell = ge(cellId);
   if (eCell.innerText.trim() == '') {
     eCell.innerText = 'X';
-    const nXWinner = checkForWin('X');
-    if (nXWinner) {
+    const nWinner = checkForWin('X');
+    if (nWinner) {
       ge('youWon').innerText = 'You Won!!!';
-
-      // set all winner cells to .red css class
-      for (let i = 1; i < 10; i++) {
-        const winnerBit = 0b1 << (9 - i);
-        console.log('Winner Bit: ' + winnerBit.toString(2));
-        if (winnerBit & nXWinner) {
-          const sCellId = 'c' + i.toString();
-          const elCell = ge(sCellId);
-          console.assert(elCell); // this is a good way to check for errors in your code.  Use it liberally!
-          elCell.className = 'red';
-        }
-      }
-
-      setTimeout(() => {
-        // this function will be called 5 seconds after the
-        // You Won!!! message is shown.
-        // clear any win message
-        ge('youWon').innerText = '';
-
-        // clear the board
-        for (let i = 1; i < 10; i++) {
-          const cellId = 'c' + i.toString();
-          const elCell = ge(cellId);
-          elCell.innerHTML = '&nbsp;';
-          elCell.className = ''; // back to black
-        }
-      }, 2000);
+      makeWinnerCellsRed(nWinner);
+      waitAndClearBoard();
     } else {
       makeAMove();
+    }
+  }
+}
+
+function waitAndClearBoard() {
+  setTimeout(() => {
+    // this function will be called 5 seconds after the
+    // You Won!!! message is shown.
+    // clear any win message
+    ge('youWon').innerText = '';
+
+    // clear the board
+    for (let i = 1; i < 10; i++) {
+      const cellId = 'c' + i.toString();
+      const elCell = ge(cellId);
+      elCell.innerHTML = '&nbsp;';
+      elCell.className = ''; // back to black
+    }
+  }, 
+  2000);
+}
+
+function makeWinnerCellsRed(nWinner) {
+    // set all winner cells to .red css class
+    for (let i = 1; i < 10; i++) {
+    const winnerBit = 0b1 << (9 - i);
+    // console.log('Winner Bit: ' + winnerBit.toString(2));
+    if (winnerBit & nWinner) {
+      const sCellId = 'c' + i.toString();
+      const elCell = ge(sCellId);
+      console.assert(elCell); // this is a good way to check for errors in your code.  Use it liberally!
+      elCell.className = 'red';
     }
   }
 }
@@ -64,7 +71,7 @@ function checkForWin(sSide = 'X') {
       nXCells += 0b1;
     }
   }
-  console.log('nXCells = ' + nXCells.toString(2));
+  // console.log('nXCells = ' + nXCells.toString(2));
 
   // nXCells is a binary number that has a 1 where a sSide (X or O) character is at
   // cell position is dictated by the bit position: 
@@ -88,7 +95,7 @@ function checkForWin(sSide = 'X') {
   for (const nXWinner of nXWinners) {
     let intersection = (nXWinner & nXCells);
     fMatch = (intersection == nXWinner); // binary & operator
-    console.log(`Comparing ${nXCells.toString(2)} with ${nXWinner.toString(2)} => ${fMatch}  &= ${intersection.toString(2)}`)
+    // console.log(`Comparing ${nXCells.toString(2)} with ${nXWinner.toString(2)} => ${fMatch}  &= ${intersection.toString(2)}`)
     // Truth table for & binary operator
     //   0 1
     // 0 0 0
@@ -102,16 +109,62 @@ function checkForWin(sSide = 'X') {
 }
 
 function makeAMove() {
-    // pick and empty cell to put a O on to make the computer's move
-    // mark that cell with an O
-    // cheak for a win for the O player (computer)
-    // if we won:
-    //      mark the winner squares with red
-    //      show you won!!! text
-    //      wait some time and clear the board and the you won text
+  // pick an empty cell to put an O on to make the computer's move
+  // for now pick a random empty cell
+  const startCell = Math.floor(Math.random() * 9) + 1;
+  console.log(`startCEll = ${startCell}`);
+  let thisCell = startCell;
+  let fEmptyFound = false;
+  do {
+    // find empty cell
+    console.log(`thisCell=${thisCell}`);
+    if (ge('c' + thisCell).innerHTML.trim() == '&nbsp;') {
+      fEmptyFound = true;
+      break;
+    }
+
+    thisCell++;
+    if (thisCell == 10) {
+      thisCell = 1;
+    }
+  } while (thisCell != startCell);
+
+  if (!fEmptyFound) {
+    // we are done and the board full so we have a tie
+    ge('youWon').innerText = 'Tie Game!!!';
+    waitAndClearBoard();
+  }
+
+  // Mark that cell with a O
+  ge('c' + thisCell).innerText = 'O';
+
+  // Check for a win for the O player (computer)
+  // if we won:
+  let nWinner = checkForWin('O')
+  if  (nWinner) {
+    //    Mark the winner squares with red
+    makeWinnerCellsRed(nWinner);
+
+    //    Show the you won!!! text
+    ge('youWon').innerText = 'You Lost!!!';
+
+    //    wait some time and clear the board and the you won text
+    waitAndClearBoard();
+  }
 }
   </script>
   <style type="text/css">
+    .bigBdr {
+      font-size: 24pt;
+      font-family: Arial;
+      font-weight: bold;
+      border-collapse: collapse;
+    }
+    .bigBdr td {
+      border: solid black 2px;
+      width: 2em;
+      text-align: center;
+    }
     .ticTacToe {
       font-size: 48pt;
       font-family: Arial;
@@ -201,6 +254,6 @@ function makeAMove() {
       </tr>
     </tbody>
   </table>
-  <h1 id="youWon"></h1>
+  <h1 id="youWon" class="red"></h1>
 </body>
 </html>
