@@ -1,6 +1,7 @@
 This is some text
-that we will do 
+that we will do (add this)
 merging on.
 
+Add this
 Should be easy
 I hope.
