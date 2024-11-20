@@ -1,0 +1,6 @@
+This is some text
+that we will do 
+merging on.
+
+Should be easy
+I hope.
