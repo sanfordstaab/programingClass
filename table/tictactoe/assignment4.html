@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TicTacToe Assignment 2</title>
+  <script type="text/javascript">
+
+function ge(id) {
+  return document.getElementById(id);
+}
+
+function eh_onCellClick(event) {
+  const cellId = event.target.id;
+  const eCell = ge(cellId);
+  if (eCell.innerText.trim() == '') {
+    eCell.innerText = 'X';
+    const nWinner = checkForWin('X');
+    if (nWinner) {
+      ge('youWon').innerText = 'You Won!!!';
+      makeWinnerCellsRed(nWinner);
+      waitAndClearBoard();
+    } else {
+      makeAMove();
+    }
+  }
+}
+
+function waitAndClearBoard() {
+  setTimeout(() => {
+    // this function will be called 5 seconds after the
+    // You Won!!! message is shown.
+    // clear any win message
+    ge('youWon').innerText = '';
+
+    // clear the board
+    for (let i = 1; i < 10; i++) {
+      const cellId = 'c' + i.toString();
+      const elCell = ge(cellId);
+      elCell.innerHTML = '&nbsp;';
+      elCell.className = ''; // back to black
+    }
+  }, 
+  2000);
+}
+
+function makeWinnerCellsRed(nWinner) {
+    // set all winner cells to .red css class
+    for (let i = 1; i < 10; i++) {
+    const winnerBit = 0b1 << (9 - i);
+    // console.log('Winner Bit: ' + winnerBit.toString(2));
+    if (winnerBit & nWinner) {
+      const sCellId = 'c' + i.toString();
+      const elCell = ge(sCellId);
+      console.assert(elCell); // this is a good way to check for errors in your code.  Use it liberally!
+      elCell.className = 'red';
+    }
+  }
+}
+
+/**
+ * returns nXWinner if the given side won otherwise 0
+ */
+function checkForWin(sSide = 'X') {
+  let nXCells = 0b0; // binary number
+  for (let nCell = 1; nCell <= 9; nCell++) {
+    const cellId = 'c' + nCell.toString();
+    const eCell = ge(cellId);
+    nXCells <<= 1; // shift left
+    if (eCell.innerText == sSide) {
+      nXCells += 0b1;
+    }
+  }
+  // console.log('nXCells = ' + nXCells.toString(2));
+
+  // nXCells is a binary number that has a 1 where a sSide (X or O) character is at
+  // cell position is dictated by the bit position: 
+  //   123456789
+  // 0b001010101 -> X or O is in cells 3, 5, 7 and 9
+
+  const nXWinners = [
+    0b111000000, // across
+    0b000111000,
+    0b000000111,
+
+    0b100100100, // top to bottom
+    0b010010010,
+    0b001001001,
+
+    0b100010001, // diagonal 3 in a row
+    0b001010100,
+  ];
+
+  let fMatch = false;
+  for (const nXWinner of nXWinners) {
+    let intersection = (nXWinner & nXCells);
+    fMatch = (intersection == nXWinner); // binary & operator
+    // console.log(`Comparing ${nXCells.toString(2)} with ${nXWinner.toString(2)} => ${fMatch}  &= ${intersection.toString(2)}`)
+    // Truth table for & binary operator
+    //   0 1
+    // 0 0 0
+    // 1 0 1 -> a 1 results only if both inputs are 1
+
+    if (fMatch) {
+      return nXWinner; // winner was found
+    }
+  }
+  return 0;
+}
+
+function makeAMove() {
+  // pick an empty cell to put an O on to make the computer's move
+  // for now pick a random empty cell
+  const startCell = Math.floor(Math.random() * 9) + 1;
+  console.log(`startCEll = ${startCell}`);
+  let thisCell = startCell;
+  let fEmptyFound = false;
+  do {
+    // find empty cell
+    console.log(`thisCell=${thisCell}`);
+    if (ge('c' + thisCell).innerHTML.trim() == '&nbsp;') {
+      fEmptyFound = true;
+      break;
+    }
+
+    thisCell++;
+    if (thisCell == 10) {
+      thisCell = 1;
+    }
+  } while (thisCell != startCell);
+
+  if (!fEmptyFound) {
+    // we are done and the board full so we have a tie
+    ge('youWon').innerText = 'Tie Game!!!';
+    waitAndClearBoard();
+  }
+
+  // Mark that cell with a O
+  ge('c' + thisCell).innerText = 'O';
+
+  // Check for a win for the O player (computer)
+  // if we won:
+  let nWinner = checkForWin('O')
+  if  (nWinner) {
+    //    Mark the winner squares with red
+    makeWinnerCellsRed(nWinner);
+
+    //    Show the you won!!! text
+    ge('youWon').innerText = 'You Lost!!!';
+
+    //    wait some time and clear the board and the you won text
+    waitAndClearBoard();
+  }
+}
+  </script>
+  <style type="text/css">
+    .bigBdr {
+      font-size: 24pt;
+      font-family: Arial;
+      font-weight: bold;
+      border-collapse: collapse;
+    }
+    .bigBdr td {
+      border: solid black 2px;
+      width: 2em;
+      text-align: center;
+    }
+    .ticTacToe {
+      font-size: 48pt;
+      font-family: Arial;
+      font-weight: bold;
+      border-collapse: collapse;
+    }
+    .ticTacToe td {
+      width: 2em;
+      text-align: center;
+    }
+    .red {
+      color: red;
+    }
+    #c1 {
+      border-right: solid black 4px;
+      border-bottom: solid black 4px;
+    }
+    #c2 {
+      border-left: solid black 4px;
+      border-right: solid black 4px;
+      border-bottom: solid black 4px;
+    }
+    #c3 {
+      border-left: solid black 4px;
+      border-bottom: solid black 4px;
+    }    
+    #c4 {
+      border-top: solid black 4px;
+      border-right: solid black 4px;
+      border-bottom: solid black 4px;
+    }
+    #c5 {
+      border: solid black 4px;
+    }  
+    #c6 {
+      border-top: solid black 4px;
+      border-left: solid black 4px;
+      border-bottom: solid black 4px;
+    }   
+    #c7 {
+      border-top: solid black 4px;
+      border-right: solid black 4px;
+    }   
+    #c8 {
+      border-top: solid black 4px;
+      border-left: solid black 4px;
+      border-right: solid black 4px;
+    }    
+    #c9 {
+      border-top: solid black 4px;
+      border-left: solid black 4px;
+    }    
+  </style>
+</head>
+<body>
+  <h1>Table 1</h1>
+  <table id="one" class="ticTacToe">
+    <tbody>
+      <tr>
+        <td id="c1" onclick="eh_onCellClick(event);">
+          &nbsp;
+        </td>
+        <td id="c2" onclick="eh_onCellClick(event);">
+          &nbsp;
+        </td>
+        <td id="c3" onclick="eh_onCellClick(event);">
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td id="c4" onclick="eh_onCellClick(event);">
+          &nbsp;
+        </td>
+        <td id="c5" onclick="eh_onCellClick(event);">
+          &nbsp;
+        </td>
+        <td id="c6" onclick="eh_onCellClick(event);">
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td id="c7" onclick="eh_onCellClick(event);">
+          &nbsp;
+        </td>
+        <td id="c8" onclick="eh_onCellClick(event);">
+          &nbsp;
+        </td>
+        <td id="c9" onclick="eh_onCellClick(event);">
+          &nbsp;
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h1 id="youWon" class="red"></h1>
+</body>
+</html>
