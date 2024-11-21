@@ -1,0 +1,7 @@
+This is some text (added this)
+that we will do (some more to add) (add this)
+Delete line below this.
+
+Add this
+Should be easy
+I hope.
