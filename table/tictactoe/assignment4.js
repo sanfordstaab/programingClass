@@ -44,7 +44,7 @@ async function as_eh_onCellClick(event) {
   if (g.fGameOver) {
     return; // no clicks allow till game is being played
   }
-  const eCell = ge(event.target.id);
+  const eCell = event.target;
   if (eCell.innerText.trim() == '') { // is blank square?
     eCell.innerText = 'X'; // make our move
     await as_delay(1); // let UI catch up
@@ -56,7 +56,7 @@ async function as_eh_onCellClick(event) {
       g.fGameOver = true;
       waitAndClearBoard();
     } else {
-      setTimeout(makeAMove, 1); // lets UI catch up
+      makeAMove(); // lets UI catch up
     }
   }
 }
@@ -169,9 +169,8 @@ function checkForWinState(nMyState) {
     const eCell = ge(cellId);
     const sCell = eCell.innerHTML.trim();
     // console.log(`${cellId}=${sCell}`);
-    const testBit = 2 ** nBit;
     if (sCell == sSide1 || sCell == sSide2) {
-      nXCells |= testBit;
+      nXCells |= 2 ** nBit;
     }
   }
   // dumpBits(nXCells, `getBoardState(${sSide1}, ${sSide2})=> 0b`)
@@ -292,7 +291,7 @@ function makeRndCellOrderArray() {
   aCellsInOrder = aCellsInOrder.fill(nEmptyCell);
   for (let i = 0; i < 9; i++) {
     let iRnd = Math.floor(Math.random() * 10);
-    console.assert(iRnd >= 0 && iRnd < 10);
+    console.assert(iRnd >= 0 && iRnd <= 9);
     while (aCellsInOrder[iRnd] != nEmptyCell) {
       iRnd++;
       if (iRnd > 8) {
@@ -302,10 +301,10 @@ function makeRndCellOrderArray() {
     aCellsInOrder[iRnd] = i;
   }
 
-  for (let i = 0; i < 0; i++) {
+  for (let i = 0; i < 9; i++) {
     console.assert(aCellsInOrder[i] >= 0 && aCellsInOrder[i] <= 8);
   }
-  console.assert(!aCellsInOrder.includes(-1));
+  console.assert(!aCellsInOrder.includes(nEmptyCell));
 
   return aCellsInOrder;
 }
@@ -403,7 +402,7 @@ function checkFor2InARowState(
   //   nPlayerState=${nPlayerState.toString(2)}, 
   //   nThisBit=${nThisBit}, 2 in a row: ${fWillHave2InARow}`);
 
-  return !!fWillHave2InARow;
+  return fWillHave2InARow;
 }
 
 function dumpBits(nBits, prefix='') {
