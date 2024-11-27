@@ -1,6 +1,6 @@
-// tictactoe css
+ /* tictactoe css */
 
-.bigBdr {
+/* .bigBdr {
   font-size: 24pt;
   font-family: Arial;
   font-weight: bold;
@@ -10,7 +10,7 @@
   border: solid black 2px;
   width: 2em;
   text-align: center;
-}
+} */
 .ticTacToe {
   font-size: 48pt;
   font-family: Arial;
@@ -32,37 +32,33 @@
   border-bottom: solid black 4px;
 }
 #c2 {
-  border-left: solid black 4px;
-  border-right: solid black 4px;
-  border-bottom: solid black 4px;
+  border: solid black 4px;
+  border-top: 0px;
 }
 #c3 {
   border-left: solid black 4px;
   border-bottom: solid black 4px;
 }    
 #c4 {
-  border-top: solid black 4px;
-  border-right: solid black 4px;
-  border-bottom: solid black 4px;
+  border: solid black 4px;
+  border-left: 0px;
 }
 #c5 {
   border: solid black 4px;
 }  
 #c6 {
-  border-top: solid black 4px;
-  border-left: solid black 4px;
-  border-bottom: solid black 4px;
+  border: solid black 4px;
+  border-right: 0px;
 }   
 #c7 {
   border-top: solid black 4px;
   border-right: solid black 4px;
 }   
 #c8 {
-  border-top: solid black 4px;
-  border-left: solid black 4px;
-  border-right: solid black 4px;
+  border: solid black 4px;
+  border-bottom: 0px;
 }    
 #c9 {
   border-top: solid black 4px;
   border-left: solid black 4px;
-}   
+}    
