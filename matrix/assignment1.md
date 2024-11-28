@@ -57,6 +57,7 @@ where ... is whatever values you want to test with.
 I would just put 2 values in each array to start.
 
 You should now be able to refresh the page and just press the button.
+
 ---
 - [12] Encapsulate the sText in code to make it a function like this:
 ```
@@ -86,6 +87,7 @@ function addVectors(aV1, aV2) {
 Make sure to only call this function if the + operator is specified.
 Take the output of this function, use JSON.stringify() to turn it into a string
 and place it into the innerText of the "spnOutput" control.
+
 ---
 - [14] Implement the - operator - same as the + one but each value within the vector
 is subtracted.
