@@ -1,7 +1,12 @@
 # Matrix Assignment 1
 - [1] Create a "matrix" folder at the root of the programingClass repo.
+```
+cd \repos\programingClass
+md matrix
+```
 ---
 - [2] Create a basic .html page called matrix.html in the matrix folder.
+Remember that you can use "html" and hit tab to create basic HTML boiler plate text.
 ---
 - [3] Give it a title of "matrix"
 ---
@@ -57,6 +62,7 @@ where ... is whatever values you want to test with.
 I would just put 2 values in each array to start.
 
 You should now be able to refresh the page and just press the button.
+
 ---
 - [12] Encapsulate the sText in code to make it a function like this:
 ```
@@ -84,8 +90,12 @@ function addVectors(aV1, aV2) {
 }
 ```
 Make sure to only call this function if the + operator is specified.
-Take the output of this function, use JSON.stringify() to turn it into a string
-and place it into the innerText of the "spnOutput" control.
+Take the output of this function, use `JSON.stringify()` to turn it into a string
+and place it into the innerText of the `"spnOutput"` control.
+
 ---
-- [14] Implement the - operator - same as the + one but each value within the vector
-is subtracted.
+- [14] Implement the '-' operator: same as the '+' one but each value within the vector is subtracted.
+---
+- [Extra Credit] Implement the cross-product 'X' and the dot-product '.' 
+of vectors.  See this video (https://www.youtube.com/watch?v=gPnWm-IXoAY) for what a cross-product is.
+See this video (https://www.youtube.com/watch?v=0iNrGpwZwog) for what a dot product is.
