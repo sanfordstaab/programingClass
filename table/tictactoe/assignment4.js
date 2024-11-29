@@ -56,11 +56,7 @@ async function as_eh_onCellClick(event) {
       g.fGameOver = true;
       waitAndClearBoard();
     } else {
-<<<<<<< HEAD
       makeAMove(); // lets UI catch up
-=======
-      makeAMove();
->>>>>>> origin/master
     }
   }
 }
