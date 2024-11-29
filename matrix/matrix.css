@@ -1,0 +1,12 @@
+body {
+  background-color: chocolate;
+}
+
+textarea {
+  background-color: aquamarine;
+}
+
+#spnOutput {
+  background-color:burlywood;
+  border: solid 2px black;
+}
