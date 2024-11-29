@@ -1,2 +1,0 @@
-My first lines of play.txt
-Add a second lines of text.
