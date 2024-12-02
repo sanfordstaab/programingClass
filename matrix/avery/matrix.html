@@ -3,9 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="matrix.css" />
+    <script type="text/javascript" src="matrix.js"></script>
     <title>Matrix Calculator</title>
 </head>
 <body>
-    
+    <textarea 
+      id="txtaInput" 
+      type="textarea" 
+      cols="60" 
+      rows="20"
+      placeholder="Enter matrix's for A and B and 
+what operation you want to perform like this:
+const A = [ 3, 7, 91 ];
+const B = [ 2, -9, -25 ];
+const Operation='+'; // you can use +, -, * or /
+
+Then press the button to perform the operation."
+      >
+      const A = [ 4, 7 ];
+      const B= [ 2, -5 ];
+      operation='+';
+    </textarea>
+    <br>
+    <button onclick="eh_processInput();">
+      Process Input
+    </button>
+    <br>
+    Answer: <span id="spnOutput"></span>
 </body>
 </html>
