@@ -10,3 +10,11 @@ textarea {
   background-color:burlywood;
   border: solid 2px black;
 }
+
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
