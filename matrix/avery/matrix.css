@@ -1,0 +1,20 @@
+body {
+    background-color: rgb(255, 0, 0);
+  }
+  
+  textarea {
+    background-color: rgb(254, 254, 254);
+  }
+  
+  #spnOutput {
+    background-color:burlywood;
+    border: solid 2px black;
+  }
+  
+  .red {
+    color: red;
+  }
+  
+  .black {
+    color: black;
+  }
