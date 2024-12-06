@@ -6,7 +6,7 @@ function eh_processInput() {
     const elOut = ge('spnOutput');
     try {
             let sValue = ge('txtaInput').value;
-            sValue = '()=>{' + sValue + 'return [ A, B ,operation ]}';
+            sValue = '()=>{' + sValue + 'return [ A, B, operation ]}';
             let calc = eval(sValue)();
             console.log(calc);
     
@@ -25,11 +25,20 @@ function eh_processInput() {
         elOut.className = 'red';
       }
     }
-
-function addVectors(A, B) {
-    if (A.length != B.length) {
-        throw new Error('Both arrays must be of the same lenght!');
+    const $ = '';
+    function errors(A, B) {
+        if (A.length != B.length) {
+            throw new Error('Both arrays must be of the same lenght!');
+        }
+        if (A.includes($)) {
+            throw new Error('$ symbols are not a valid input!');
+        }
+        if (B.includes($)) {
+            throw new Error('$ symbols are not a valid input!');
+        }
     }
+    function addVectors(A, B) {
+        errors(A ,B)
     const result = [];
     for (let i = 0; i < A.length; i++) {
         result[i] = A[i] + B[i];
@@ -37,6 +46,7 @@ function addVectors(A, B) {
     return result;
 }
 function subVectors(A, B) {
+    errors(A, B)
     const result = [];
     for (let i = 0; i < A.length; i++) {
         result[i] = A[i] - B[i];

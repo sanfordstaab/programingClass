@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(178, 0, 0);
   }
   
   textarea {
@@ -8,7 +8,7 @@ body {
   
   #spnOutput {
     background-color:burlywood;
-    border: solid 2px black;
+    border: solid 1px black;
   }
   
   .red {
