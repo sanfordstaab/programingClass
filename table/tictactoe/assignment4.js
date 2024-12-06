@@ -47,7 +47,7 @@ async function as_eh_onCellClick(event) {
   const eCell = event.target;
   if (eCell.innerText.trim() == '') { // is blank square?
     eCell.innerText = 'X'; // make our move
-    await as_delay(1000); // let UI catch up
+    await as_delay(1); // let UI catch up
     const nState = getBoardState('X', 'none'); // 1s on X squares
     const nWinner = checkForWinState(nState);
     if (nWinner) {

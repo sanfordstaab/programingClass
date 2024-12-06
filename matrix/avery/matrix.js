@@ -3,8 +3,8 @@ function ge(id) {
 }
 
 function eh_processInput() {
+    const elOut = ge('spnOutput');
     try {
-        const elOut = ge('spnOutput');
             let sValue = ge('txtaInput').value;
             sValue = '()=>{' + sValue + 'return [ A, B ,operation ]}';
             let calc = eval(sValue)();
@@ -27,7 +27,7 @@ function eh_processInput() {
     }
 
 function addVectors(A, B) {
-    if (A.lenght != B.lenght) {
+    if (A.length != B.length) {
         throw new Error('Both arrays must be of the same lenght!');
     }
     const result = [];
