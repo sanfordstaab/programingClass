@@ -1,14 +1,16 @@
 body {
   background-color: chocolate;
+  font-size: 20pt;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
 textarea {
   background-color: aquamarine;
 }
 
-#spnOutput {
+#divOutput {
   background-color:burlywood;
-  border: solid 2px black;
+  border: solid 1px black;
 }
 
 .red {

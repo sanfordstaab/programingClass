@@ -34,7 +34,7 @@ Then press the button to perform the operation."
       Process Input
     </button>
     <br>
-    Answer: <span id="spnOutput"></span>
+    Answer: <span id="divOutput"></span>
 ```
 ---
 - [7] Add an onclick event handler eh_processInput() and tie it to the button.
@@ -91,7 +91,7 @@ function addVectors(aV1, aV2) {
 ```
 Make sure to only call this function if the + operator is specified.
 Take the output of this function, use `JSON.stringify()` to turn it into a string
-and place it into the innerText of the `"spnOutput"` control.
+and place it into the innerText of the `"divOutput"` control.
 
 ---
 - [14] Implement the '-' operator: same as the '+' one but each value within the vector is subtracted.
