@@ -1,21 +1,25 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Chrome",
+      "name": "Launch Chrome against localhost",
       "request": "launch",
       "type": "chrome",
-      "url": "http://localhost:8080",
+      "file": "${workspaceFolder}/index.html",
       "webRoot": "${workspaceFolder}"
     },
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Matrix on Chrome",
-      "url": "http://localhost:8080/matrix/matrix.html",
+      "name": "Launch Matrix",
+      "file": "${workspaceFolder}/matrix/matrix.html",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch TicTacToe",
+      "file": "${workspaceFolder}/table/tictactoe/ticTacToe.html",
       "webRoot": "${workspaceFolder}"
     }
   ]

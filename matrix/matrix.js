@@ -34,7 +34,7 @@ function eh_processInput(event) {
     }
     console.log(aValues);
     if (!aValues) {
-      throw new Error('We did not find any input.')''
+      throw new Error('We did not find any input.');
     }
     
     if (!Array.isArray(aValues) ||
@@ -76,10 +76,8 @@ function validateVector(v, sVectorName) {
   let sError = '';
   if (!v.length) {
     sError = `Vector ${sVectorName} must have at least one item.`;
-  }
-  
-  for (let i = 0; i < v.length; i++) {
-    if (Number.isNaN(v[i])) {
+  } else for (let i = 0; i < v.length; i++) {
+    if ('number' != typeof(v[i]) || Number.isNaN(v[i])) {
       sError = `Vector item ${
           sVectorName
         }[${
@@ -88,6 +86,10 @@ function validateVector(v, sVectorName) {
           JSON.stringify(v[i])
         }).`;
     }
+  }
+
+  if (sError) {
+    throw new Error(sError);
   }
 }
 
