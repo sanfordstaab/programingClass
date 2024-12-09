@@ -6,21 +6,20 @@ function ge(id) {
 function eh_processInput(event) {
   const elOutput = ge('divOutput');
   const elInput = ge('txtaInput');
-  let sText = elInput.value;
-  sText = `()=>{
-    ${sText}
-    return([A, B, Operation]);
-  }`;
-  console.log(sText);
-  
   try {
     // ------------ try block start
     // Everything in this block will fall into the catch
     // area if an error occurrs.  Use throw('error text')
     // to generate your own errors.
-    if (!sText) {
+    let sText = elInput.value;
+    if (!sText.trim()) {
       throw new Error('No input found.');
     }
+    sText = `()=>{
+      ${sText}
+      return([A, B, Operation]);
+    }`;
+    console.log(sText);
   
     let aValues = [];
     let fn = null;
@@ -67,6 +66,13 @@ function eh_processInput(event) {
     elOutput.className = 'black';
     // --------------- try block end
   } catch(error) {
+    if (error.message == "Cannot access 'B' before initialization") {
+      error.message = 'Vector B is not defined.';
+    } else if (error.message == "Cannot access 'A' before initialization") {
+      error.message = 'Vector A is not defined.';
+    } else if (error.message == 'Operation is not defined') {
+      error.message = 'The "Operator" variable is not defined.';
+    }
     elOutput.innerText = error.message;
     elOutput.className = 'red';
   }
