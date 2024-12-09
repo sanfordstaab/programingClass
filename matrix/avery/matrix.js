@@ -36,14 +36,17 @@ function eh_processInput() {
         if (B.includes($)) {
             throw new Error('$ symbols are not a valid input!');
         }
+        // if (result = []) {
+        //     throw new Error('You must have an input!');
+        // }
     }
     function addVectors(A, B) {
         errors(A ,B)
-    const result = [];
-    for (let i = 0; i < A.length; i++) {
-        result[i] = A[i] + B[i];
-    }
-    return result;
+        const result = [];
+        for (let i = 0; i < A.length; i++) {
+            result[i] = A[i] + B[i];
+        }
+        return result;
 }
 function subVectors(A, B) {
     errors(A, B)
