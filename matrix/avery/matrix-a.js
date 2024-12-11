@@ -36,8 +36,11 @@ function eh_processInput() {
         if (B.includes($)) {
             throw new Error('$ symbols are not a valid input!');
         }
+        // if (operation != '-' || '+') {
+        //     throw new Error('You must have a + or a - as an operation!');
+        // }
         // if (result = []) {
-        //     throw new Error('You must have an input!');
+        //     throw new Error('You must have an input!')
         // }
     }
     function addVectors(A, B) {
