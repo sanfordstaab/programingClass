@@ -6,7 +6,8 @@
   <!-- Filled in by text given to MsgBox.alert() -->
 </div>
 <div class="ac">
-  <button id="btnAlert">
+  <button id="btnAlert"
+    onclick="MsgBox.eh_onConfirmClose();">
     Ok
   </button>
 </div>
