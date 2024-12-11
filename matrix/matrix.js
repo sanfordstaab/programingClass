@@ -3,6 +3,11 @@ function ge(id) {
   return document.getElementById(id);
 }
 
+function eh_onPageLoad(event) {
+  alert(`This project was designed to work in the Chrome Browser.
+    Other browsers may not work correctly.`);
+}
+
 function eh_processInput(event) {
   const elOutput = ge('divOutput');
   const elInput = ge('txtaInput');
@@ -25,15 +30,15 @@ function eh_processInput(event) {
     let fn = null;
     try {
       fn = eval(sText);
-      aValues = fn();
     } catch (e) {
       // You can re-throw an error within a nested try/catch
       // block to handle sub-errors specially.
       throw new Error(improveJSONErrorMsg(e.message, sText));
     }
+    aValues = fn();
     console.log(aValues);
     if (!aValues) {
-      throw new Error('We did not find any input.');
+      throw new Error('Your input did not parse properly.');
     }
     
     if (!Array.isArray(aValues) ||
