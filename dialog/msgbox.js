@@ -1,5 +1,71 @@
 // msgbox.js
 
+// HTML related code:
+{/* <dialog id="dlgAlert" class="stdDlg">
+<div id="divAlert">
+  <!-- Filled in by text given to MsgBox.alert() -->
+</div>
+<div class="ac">
+  <button id="btnAlert">
+    Ok
+  </button>
+</div>
+<br>
+</dialog>
+
+<dialog id="dlgConfirm" class="stdDlg">
+<div id="divConfirm">
+  <!-- Filled in by text given to MsgBox.confirm() -->
+</div>
+<div class="ac">
+  <button id="btnConfirmOk">
+    Ok / Yes
+  </button>
+  <button id="btnConfirmCancel">
+    Cancel / No
+  </button>        
+</div>
+<br>
+</dialog>
+
+<dialog id="dlgWarning" class="stdDlg bgWarning">
+<div id="divWarning">
+  <!-- Filled in by text given to MsgBox.warning() -->
+</div>
+<div class="ac">
+  <button id="btnWarningOk">
+    Ok / Yes
+  </button>
+  <button id="btnWarningCancel">
+    Cancel / No
+  </button>        
+</div>
+<br>
+</dialog>  */}
+
+// CSS related code:
+// .stdDlg {
+//   max-width: 50ch;
+//   border-radius: 1em;
+//   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+// }
+
+// .wideDlg {
+//   border-radius: 1em;
+//   box-shadow: 1em;
+// }
+
+/**
+ * Delays the execution of subsequent code for a specified amount of time.
+ * @param {number} time The amount of time to delay in milliseconds.
+ * @returns {Promise} A promise that resolves after the specified time has passed.
+ */
+async function as_delay(time) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+}
+
 /*
  * This static class uses the HTML dialog element to implement
  * an asynchronous API that pops up the dialog, collects any data
