@@ -1,6 +1,10 @@
 function ge(id) {
     return document.getElementById(id);
 }
+function eh_onPageLoad() {
+    alert(`This Project was designed to work in the Chrome Browser. 
+        Other browser may not work the same.`);
+}
 
 function eh_processInput() {
     const elOut = ge('spnOutput');
@@ -26,7 +30,7 @@ function eh_processInput() {
       }
     }
     const $ = '';
-    function errors(A, B) {
+    function checkForErrors(A, B) {
         if (A.length != B.length) {
             throw new Error('Both arrays must be of the same lenght!');
         }
@@ -36,7 +40,7 @@ function eh_processInput() {
         if (B.includes($)) {
             throw new Error('$ symbols are not a valid input!');
         }
-        // if (operation != '-' || '+') {
+        // if (op != '-' || op != '+') {
         //     throw new Error('You must have a + or a - as an operation!');
         // }
         // if (result = []) {
@@ -44,7 +48,7 @@ function eh_processInput() {
         // }
     }
     function addVectors(A, B) {
-        errors(A ,B)
+     checkForErrors(A ,B)
         const result = [];
         for (let i = 0; i < A.length; i++) {
             result[i] = A[i] + B[i];
@@ -52,7 +56,7 @@ function eh_processInput() {
         return result;
 }
 function subVectors(A, B) {
-    errors(A, B)
+ checkForErrors(A, B)
     const result = [];
     for (let i = 0; i < A.length; i++) {
         result[i] = A[i] - B[i];
