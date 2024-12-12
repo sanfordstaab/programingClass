@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A1 Demo</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style type="text/css" id="styles">
+.stdDlg {
+  max-width: 50ch;
+  border-radius: 1em;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.fancyDlg {
+  max-width: 90ch;
+  border-radius: 1em;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-color: rgb(194, 141, 78);
+  opacity: .7;
+}
+
+.wideDlg {
+  border-radius: 1em;
+  box-shadow: 1em;
+}
+
+.ac {
+  text-align: center;
+  margin: auto;
+}
+
+.bgWarning {
+  background-color: orange;
+}
+
+body {
+  background-color: cornflowerblue;
+  font-size: 20pt;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 1em;
+}
+      </style>
+      <script src="msgbox.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+function eh_cheapAlert() {
+  alert(ge('txtaMessage').value);
+  ge('spnResult').innerText = '';
+}
+
+function eh_cheapConfirm() {
+  const result = confirm(ge('txtaMessage').value);
+  ge('spnResult').innerText = result;
+}
+
+async function as_eh_showAlert() {
+  await MsgBox.alert(ge('txtaMessage').value);
+  ge('spnResult').innerText = '';
+}
+
+async function as_eh_showConfirm() {
+  const result = await MsgBox.confirm(ge('txtaMessage').value)
+  ge('spnResult').innerText = result;
+}
+
+async function as_eh_showWarning() {
+  const result = await MsgBox.warning(ge('txtaMessage').value)
+  ge('spnResult').innerText = result;  
+}
+
+async function as_eh_showCustom() {
+  const result = await MsgBox.stdDlg(
+    `This is the custom inner HTML:
+    <br>
+    <input id="txtChangedValue" type="text" value="change me"/>
+    <br>
+    `,
+    'dlgFancy',
+    'divFancy',
+    true, // fWide
+    null // fnCallbackOnShown
+  );
+  ge('spnResult').innerText = result;
+}
+
+function eh_onFancyClose(event) {
+  MsgBox.close(ge('txtChangedValue').value);
+}
+
+</script>
+  </head>
+  <body>
+
+    <!-- Dialogs -->
+
+    <dialog id="dlgAlert" class="stdDlg">
+      <div id="divAlert">
+        <!-- Filled in by text given to MsgBox.alert() -->
+      </div>
+      <div class="ac">
+        <button id="btnAlert"
+          onclick="eh_onConfirmClose(null);"
+          >
+          Ok
+        </button>
+      </div>
+      <br>
+      </dialog>
+      
+      <dialog id="dlgConfirm" class="stdDlg">
+      <div id="divConfirm">
+        <!-- Filled in by text given to MsgBox.confirm() -->
+      </div>
+      <div class="ac">
+        <button id="btnConfirmOk"
+          onclick="eh_onConfirmClose(true);"  
+          >
+          Ok / Yes
+        </button>
+        <button id="btnConfirmCancel"
+          onclick="eh_onConfirmClose(false);"  
+          >
+          Cancel / No
+        </button>        
+      </div>
+      <br>
+      </dialog>
+      
+      <dialog id="dlgWarning" class="stdDlg bgWarning">
+      <div id="divWarning">
+        <!-- Filled in by text given to MsgBox.warning() -->
+      </div>
+      <div class="ac">
+        <button id="btnWarningOk"
+          onclick="eh_onConfirmClose(true);"  
+          >
+          Ok / Yes
+        </button>
+        <button id="btnWarningCancel"
+          onclick="eh_onConfirmClose(false);"  
+          >
+          Cancel / No
+        </button>        
+      </div>
+      <br>
+      </dialog>  
+
+      <dialog id="dlgFancy" class="fancyDlg">
+        <div id="divFancy">
+          <!-- Filled in by text/html given to MsgBox.stdDlg() -->
+        </div>
+        <div class="ac">
+          <button id="btnFancy"
+            onclick="eh_onFancyClose(event);"
+            >
+            Close This Dialog
+          </button>
+        </div>
+        <br>
+        </dialog>      
+
+      <!-- End Dialogs -->
+
+    <textarea 
+      cols="50"
+      rows="4"
+      id="txtaMessage"
+      >Enter your message here.</textarea>
+    <br>
+    <button onclick="eh_cheapAlert();">Show cheap alert</button>
+    <br>
+    <button onclick="eh_cheapConfirm();">Show cheap confirm</button>
+    <br>
+    <button onClick="as_eh_showAlert();">Show Fancy Alert Dialog</button>
+    <br>
+    <button onClick="as_eh_showConfirm();">Show Fancy Confirm Dialog</button>
+    <br>
+    <button onClick="as_eh_showWarning();">Show Fancy Warnging Dialog</button>
+    <br>
+    <button onClick="as_eh_showCustom();">Show Custom Dialog</button>
+    <br>
+    <span id="spnResult"></span>   
+  </body>
+</html>

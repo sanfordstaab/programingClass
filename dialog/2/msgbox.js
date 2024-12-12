@@ -1,16 +1,8 @@
 // msgbox.js
 
-// CSS related code:
-// .stdDlg {
-//   max-width: 50ch;
-//   border-radius: 1em;
-//   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-// }
-
-// .wideDlg {
-//   border-radius: 1em;
-//   box-shadow: 1em;
-// }
+function ge(id) {
+  return document.getElementById(id);
+}
 
 /**
  * Delays the execution of subsequent code for a specified amount of time.
@@ -59,7 +51,7 @@ class MsgBox {
         const closeDialogEventListener = () => {
           const el = MsgBox.aElSavedDialog.pop();
           el.removeEventListener('close', closeDialogEventListener);
-          resolve(el.returnValue);
+          resolve(el.returnValue); 
           // returns from await on MsgBox.open()
         }
         MsgBox.aElSavedDialog.at(-1).addEventListener('close', closeDialogEventListener);
@@ -86,10 +78,10 @@ class MsgBox {
    * @returns {string} whatever value was passed into MsgBox.close().
    */
   static async stdDlg(
-    html,
-    id,
-    innerDivId,
-    fWide = false,
+    html, 
+    id, 
+    innerDivId, 
+    fWide=false, 
     fnCallbackOnShown = null
   ) {
     const elDlg = ge(id);
@@ -98,13 +90,13 @@ class MsgBox {
       elDlg.classList.add('wideDlg');
     } else {
       elDlg.classList.remove('wideDlg');
-      elDlg.classList.add('stdDlg');
+      elDlg.classList.add('stdDlg');      
     }
     if (html && innerDivId) {
       ge(innerDivId).innerHTML = html;
     }
     return await MsgBox.open(elDlg, fnCallbackOnShown);
-  }
+  }  
 
   /*
    * Fancy form of window.alert();
@@ -113,7 +105,7 @@ class MsgBox {
    * Handler:
    * onclick="MsgBox.close();"
    */
-  static async alert(html, fWide = false) {
+  static async alert(html, fWide=false) {
     return await MsgBox.stdDlg(html, 'dlgAlert', 'divAlert', fWide);
   }
 
@@ -124,11 +116,11 @@ class MsgBox {
    * Handler:
    * onclick="MsgBox.close();" after having set elDialog.returnValue
    */
-  static async confirm(html, fWide = false) {
+  static async confirm(html, fWide=false) {
     return await MsgBox.stdDlg(html, 'dlgConfirm', 'divConfirm', fWide);
   }
 
-  static async warning(html, fWide = false) {
+  static async warning(html, fWide=false) {
     return await MsgBox.stdDlg(html, 'dlgWarning', 'divWarning', fWide);
   }
 }

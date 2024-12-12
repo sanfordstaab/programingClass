@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch MsgBox Demo 1",
+      "request": "launch",
+      "type": "chrome",
+      "file": "dialog/1/demo.html",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
       "name": "Launch Chrome against localhost",
       "request": "launch",
       "type": "chrome",
