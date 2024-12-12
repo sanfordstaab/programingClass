@@ -4,17 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="msgbox.js" type="text/javascript"></script>
-    <script src="avery.js" type="text/javascript"></script>
-    <title>Document</title>
+    <!-- <script src="msgbox.js" type="text/javascript"></script> -->
+    <script src="dialog.js" type="text/javascript"></script>
+    <title>duakig</title>
 </head>
 
 <body>
-    <button onclick="eh_showAlert(event);">Show alert</button>
+    <textarea id="txtMessage" cols="50" rows="4" preview="Alert."></textarea>
+  <button onclick="eh_showAlert();">
+    Show Alert
+  </button>
+  <button onclick="eh_showConfirm();">
+    Show Confirm
+  </button>
+  <br>
+  <span id="spnResult"></span>
+    <!-- <button onclick="eh_showAlert(event);">Show alert</button>
     <dialog id="dlgAlert" class="stdDlg">
-        <div id="divAlert">
+        <div id="divAlert"> -->
             <!-- Filled in by text given to MsgBox.alert() -->
-        </div>
+        <!-- </div>
         <div class="ac">
             <button id="btnAlert"
               onclick="MsgBox.eh_onConfirmClose();">
@@ -25,9 +34,9 @@
     </dialog>
 
     <dialog id="dlgConfirm" class="stdDlg">
-        <div id="divConfirm">
+        <div id="divConfirm"> -->
             <!-- Filled in by text given to MsgBox.confirm() -->
-        </div>
+        <!-- </div>
         <div class="ac">
             <button id="btnConfirmOk"
              onclick="MsgBox.eh_onConfirmClose(true);">
@@ -42,9 +51,9 @@
     </dialog>
 
     <dialog id="dlgWarning" class="stdDlg bgWarning">
-        <div id="divWarning">
+        <div id="divWarning"> -->
             <!-- Filled in by text given to MsgBox.warning() -->
-        </div>
+        <!-- </div>
         <div class="ac">
             <button id="btnWarningOk"
             onclick="MsgBox.eh_onConfirmClose(true);">
@@ -56,7 +65,7 @@
             </button>
         </div>
         <br>
-    </dialog>
+    </dialog> -->
 </body>
 
 </html>
