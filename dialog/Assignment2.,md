@@ -1,0 +1,26 @@
+# Dialog Assignment 2
+- [1] Use the MsgBox.js file as a component to demonstrate the ways
+to use it.
+Create an input textarea control that the user can edit.
+Add buttons for showing 
+  - the old built-in alert dialog
+  - the old built-in confirm dialog
+  - the MsgBox.alert dialog
+  - the MsgBox.confirm dialog
+  - the MsgBox.warning dialog
+  - the MsgBox.stdDlg dialog
+Use appropriate css classes to make the dialogs different.
+The stdDlg call dialog should contain a test input control that the user
+can edit and whatever is in that control should be returned as the result
+of the dialog.
+Note that you will have to create a new \<dialog\> element for the stdDlg
+dialog to meet this criteria and a special onclick handler for the ok button.
+You can start this new \<dialog\> element by copying from the alert one.
+In all dialog cases show the return value in the spnResult control innerText.
+For the alert dialogs just clear the spnResult.innerText value to ''.
+
+This is quite tricky as it does many async calls and you must fully
+understand how the MsgBox class works - which is the purpose of this
+lesson.
+See if you can come up with any suggested improvements to the MsgBox 
+class that might make it even easier to use and figure out.
