@@ -6,15 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="msgbox.js" type="text/javascript"></script> -->
     <script src="dialog.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="dialog.css"><link/>
     <title>duakig</title>
 </head>
 
 <body>
+    <h3>Enter text into the txtarea.</h3>
     <textarea id="txtMessage" cols="50" rows="4" preview="Alert."></textarea>
-  <button onclick="eh_showAlert();">
+    <br>
+    <h4>Press one of the buttons to continue.</h4>
+    <br>
+  <button id="alertButton" onclick="eh_showAlert();">
     Show Alert
   </button>
-  <button onclick="eh_showConfirm();">
+  <button id="confirmButton" onclick="eh_showConfirm();">
     Show Confirm
   </button>
   <br>
