@@ -1,6 +1,8 @@
 textarea {
     background-color: #ffac00;
+    resize: none;
 }
+
 #alertButton {
     background-color: rgb(147, 0, 0);
     font-family: monospace;
@@ -12,6 +14,7 @@ textarea {
     border-radius: 20px;
     box-shadow: 0 4px #505050;
 }
+
 #confirmButton {
     background-color: rgb(0, 128, 0);
     font-family: monospace;
@@ -23,22 +26,27 @@ textarea {
     border-radius: 20px;
     box-shadow: 0 4px #505050;
 }
+
 body {
     background-color: navajowhite;
 }
+
 h3 {
     padding-bottom: 0px;
     margin-bottom: 0px;
 }
+
 h4 {
     padding: 0px;
     margin: 0px;
 }
+
 button {
-    border: 2px  black;
+    border: 2px black;
 }
+
 #confirmButton:hover {
-    transition-duration: .5s;
+    transition-duration: .1s;
     background-color: rgb(0, 158, 0);
     color: white;
 }
@@ -47,14 +55,16 @@ button {
     background-color: rgb(0, 128, 0);
     box-shadow: 0 5px #505050;
     transform: translateY(3px);
-  }
+}
+
 #alertButton:hover {
-    transition-duration: .5s;
-    background-color:rgb(171, 0, 0);
+    transition-duration: .1s;
+    background-color: rgb(171, 0, 0);
     color: white;
 }
+
 #alertButton:active {
-    background-color:rgb(147, 0, 0);
+    background-color: rgb(147, 0, 0);
     box-shadow: 0 5px #505050;
     transform: translateY(3px);
 }
