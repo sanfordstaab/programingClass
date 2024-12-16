@@ -2,7 +2,7 @@ function ge(id) {
     return document.getElementById(id);
 }
 async function eh_showAlert(event) {
-   alert('This is an Alert message.');
+   alert('Ack! You should have pressed the green button!');
 }
 async function eh_showConfirm() {
     const msg = ge('txtMessage').value
