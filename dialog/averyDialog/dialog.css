@@ -1,6 +1,7 @@
 textarea {
     background-color: #ffac00;
     resize: none;
+    border-radius: 5px;
 }
 
 #alertButton {
