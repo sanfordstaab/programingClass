@@ -7,5 +7,6 @@ async function eh_showAlert(event) {
 async function eh_showConfirm() {
     const msg = ge('txtMessage').value
     const result = confirm(msg);
-    ge('spnResult').innerText = JSON.stringify(result);
+    // ge('spnResult').innerText = JSON.stringify(result);
+    console.log(`The result returned ${result}`);
 }

@@ -5,7 +5,8 @@ textarea {
 
 #alertButton {
     background-color: rgb(147, 0, 0);
-    font-family: monospace;
+    font-family: copperplate;
+    font-size: 15px;
     color: mintcream;
     display: inline-block;
     padding: 10px 20px;
@@ -17,7 +18,8 @@ textarea {
 
 #confirmButton {
     background-color: rgb(0, 128, 0);
-    font-family: monospace;
+    font-family: copperplate;
+    font-size: 15px;
     color: mintcream;
     display: inline-block;
     padding: 10px 20px;
