@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <script type="text/javascript">
+        function eh_click() {
+            const el = document.getElementById('output');
+            let n = Number(el.innerText);
+           n++
+           el.innerText = n;
+        }
+    </script>
+    <title>increment</title>
+</head>
+<body>
+    <button onclick="eh_click()">+1</button>
+    <span id="output">0</span>
+</body>
+</html>
