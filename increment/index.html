@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="index.css" />
     <script type="text/javascript">
         function eh_click() {
@@ -17,5 +18,29 @@
 <body>
     <button onclick="eh_click()">+1</button>
     <span id="output">0</span>
+=======
+    <title>Increment</title>
+    <style type="css">
+        body {
+            background-color: blanchedalmond    ;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="eh_count();">
+        Increment the number
+    </button>
+    <span id="num">0</span>
+
+    <!-- code -->
+    <script type="text/javascript">
+        function eh_count(event) {
+            const el = document.getElementById('num');
+            let n = Number(el.innerText);
+            n++;
+            el.innerText = n;
+        }
+    </script>
+>>>>>>> origin/Sandy
 </body>
 </html>
