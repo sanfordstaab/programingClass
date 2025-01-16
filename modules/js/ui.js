@@ -82,17 +82,21 @@ export class UI {
         const boxes = this.container.querySelectorAll('.box');
         for (let index = 0; index < boxes.length; index++) {
             const box = boxes[index];
+            const owner = this.game.boxes[index];
             
-            // Reset the class
-            box.className = 'box';
+            console.log(`Checking box ${index}:`, {
+                boxElement: box,
+                owner: this.game.boxes[index]
+            });
             
-            // Add player class if owned
-            if (this.game.boxes[index] === 1) {
-                box.classList.add('player1');
+            if (owner === 1) {
+                box.className = 'box player1';
                 console.log(`box ${index} is owned by player 1`);
-            } else if (this.game.boxes[index] === 2) {
-                box.classList.add('player2');
-                console.log(`box ${index} is owned by player 1`);
+            } else if (owner === 2) {
+                box.className = 'box player2';
+                console.log(`box ${index} is owned by player 2`);
+            } else {
+                box.className = 'box';
             }
         };
     }

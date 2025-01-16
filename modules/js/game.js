@@ -81,10 +81,13 @@ export class Game {
      */
     isBoxComplete(row, col) {
         // Calculate indices for the four lines around this box
-        const topIndex = row * (this.size + 1) + col;
-        const bottomIndex = (row + 1) * (this.size + 1) + col;
-        const leftIndex = row * this.size + col;
-        const rightIndex = row * this.size + col + 1;
+        // For a box at (row,col), we need:
+        // - horizontal lines: row*(size) + col for top, (row+1)*(size) + col for bottom
+        // - vertical lines: row*(size+1) + col for left, row*(size+1) + (col+1) for right
+        const topIndex = row * (this.size) + col;
+        const bottomIndex = (row + 1) * (this.size) + col;
+        const leftIndex = row * (this.size + 1) + col;
+        const rightIndex = row * (this.size + 1) + (col + 1);
 
         // Check if all four lines around the box are drawn
         const top = this.horizontalLines[topIndex];
@@ -101,7 +104,9 @@ export class Game {
             top,
             bottom,
             left,
-            right
+            right,
+            horizontalLines: this.horizontalLines,
+            verticalLines: this.verticalLines
         });
 
         return top && bottom && left && right;
