@@ -68,7 +68,7 @@ export class UI {
         const index = parseInt(element.dataset.index);
         
         if (this.game.makeMove(type, index)) {
-            element.classList.add('active');
+            element.classList.add(`player${this.game.currentPlayer}`);
             this.updateBoxes();
             this.updateStatus();
         }
