@@ -97,15 +97,20 @@ export class UI {
         const status = document.getElementById('status');
         const scores = this.game.getScores();
         
+        // Reset classes
+        status.classList.remove('player1', 'player2');
+        
         if (this.game.gameOver) {
             const winner = this.game.getWinner();
             if (winner === 0) {
                 status.textContent = `Game Over! It's a tie! (${scores.player1} - ${scores.player2})`;
             } else {
                 status.textContent = `Game Over! Player ${winner} wins! (${scores.player1} - ${scores.player2})`;
+                status.classList.add(`player${winner}`);
             }
         } else {
             status.textContent = `Player ${this.game.currentPlayer}'s turn (Red: ${scores.player1}, Blue: ${scores.player2})`;
+            status.classList.add(`player${this.game.currentPlayer}`);
         }
     }
 }
