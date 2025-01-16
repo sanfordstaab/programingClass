@@ -67,8 +67,9 @@ export class UI {
         const type = element.dataset.type;
         const index = parseInt(element.dataset.index);
         
-        if (this.game.makeMove(type, index)) {
-            element.classList.add(`player${this.game.currentPlayer}`);
+        const moveMadeBy = this.game.makeMove(type, index);
+        if (moveMadeBy) { // moveMadeBy will be false if move was invalid, or 1 or 2 for the player number
+            element.classList.add(`player${moveMadeBy}`);
             this.updateBoxes();
             this.updateStatus();
         }
@@ -81,7 +82,15 @@ export class UI {
         const boxes = this.container.querySelectorAll('.box');
         boxes.forEach(box => {
             const index = parseInt(box.dataset.box);
+            console.log(`Updating box ${index}:`, {
+                boxElement: box,
+                owner: this.game.boxes[index]
+            });
+            
+            // Reset the class
             box.className = 'box';
+            
+            // Add player class if owned
             if (this.game.boxes[index] === 1) {
                 box.classList.add('player1');
             } else if (this.game.boxes[index] === 2) {

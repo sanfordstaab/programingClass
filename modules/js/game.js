@@ -40,12 +40,15 @@ export class Game {
         lines[index] = true;
         const boxesCompleted = this.checkBoxes();
         
+        // Store current player before potentially changing it
+        const moveMadeBy = this.currentPlayer;
+        
         if (!boxesCompleted) {
             this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
         }
 
         this.checkGameOver();
-        return true;
+        return moveMadeBy; // Return which player made the move
     }
 
     /**
@@ -55,6 +58,8 @@ export class Game {
     checkBoxes() {
         let boxesCompleted = false;
         
+        // For horizontal lines, check boxes above and below
+        // For vertical lines, check boxes left and right
         for (let row = 0; row < this.size; row++) {
             for (let col = 0; col < this.size; col++) {
                 const boxIndex = row * this.size + col;
@@ -75,10 +80,30 @@ export class Game {
      * @returns {boolean} True if the box is complete, false otherwise
      */
     isBoxComplete(row, col) {
-        const top = this.horizontalLines[row * (this.size + 1) + col];
-        const bottom = this.horizontalLines[(row + 1) * (this.size + 1) + col];
-        const left = this.verticalLines[row * this.size + col];
-        const right = this.verticalLines[row * this.size + col + 1];
+        // Calculate indices for the four lines around this box
+        const topIndex = row * (this.size + 1) + col;
+        const bottomIndex = (row + 1) * (this.size + 1) + col;
+        const leftIndex = row * this.size + col;
+        const rightIndex = row * this.size + col + 1;
+
+        // Check if all four lines around the box are drawn
+        const top = this.horizontalLines[topIndex];
+        const bottom = this.horizontalLines[bottomIndex];
+        const left = this.verticalLines[leftIndex];
+        const right = this.verticalLines[rightIndex];
+
+        // For debugging
+        console.log(`Box (${row},${col}):`, {
+            topIndex,
+            bottomIndex,
+            leftIndex,
+            rightIndex,
+            top,
+            bottom,
+            left,
+            right
+        });
+
         return top && bottom && left && right;
     }
 
