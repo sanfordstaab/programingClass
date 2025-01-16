@@ -4,70 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dots and Boxes</title>
-    <style>
-        .game-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px;
-        }
-        .grid {
-            display: grid;
-            gap: 2px;
-            margin: 20px;
-        }
-        .dot {
-            width: 10px;
-            height: 10px;
-            background: black;
-            border-radius: 50%;
-        }
-        .line {
-            background: #ddd;
-            cursor: pointer;
-        }
-        .line:hover {
-            background: #999;
-        }
-        .line.player1 {
-            background: #ff0000;
-        }
-        .line.player2 {
-            background: #0088ff;
-        }
-        .horizontal-line {
-            height: 8px;
-            width: 50px;
-        }
-        .vertical-line {
-            width: 8px;
-            height: 50px;
-        }
-        .box {
-            width: 50px;
-            height: 50px;
-        }
-        .box.player1 {
-            background: #ff0000;
-        }
-        .box.player2 {
-            background: #0088ff;
-        }
-        .controls {
-            margin: 20px;
-        }
-        #status {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin: 10px;
-        }
-        #status.player1 {
-            color: #ff0000;
-        }
-        #status.player2 {
-            color: #0088ff;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="game-container">

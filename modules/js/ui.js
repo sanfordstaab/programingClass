@@ -80,12 +80,8 @@ export class UI {
      */
     updateBoxes() {
         const boxes = this.container.querySelectorAll('.box');
-        boxes.forEach(box => {
-            const index = parseInt(box.dataset.box);
-            console.log(`Updating box ${index}:`, {
-                boxElement: box,
-                owner: this.game.boxes[index]
-            });
+        for (let index = 0; index < boxes.length; index++) {
+            const box = boxes[index];
             
             // Reset the class
             box.className = 'box';
@@ -93,10 +89,12 @@ export class UI {
             // Add player class if owned
             if (this.game.boxes[index] === 1) {
                 box.classList.add('player1');
+                console.log(`box ${index} is owned by player 1`);
             } else if (this.game.boxes[index] === 2) {
                 box.classList.add('player2');
+                console.log(`box ${index} is owned by player 1`);
             }
-        });
+        };
     }
 
     /**
@@ -118,8 +116,17 @@ export class UI {
                 status.classList.add(`player${winner}`);
             }
         } else {
-            status.textContent = `Player ${this.game.currentPlayer}'s turn (Red: ${scores.player1}, Blue: ${scores.player2})`;
-            status.classList.add(`player${this.game.currentPlayer}`);
+            status.innerHTML = `Player ${
+                this.game.currentPlayer
+            }'s turn (Red: <span class="player1Color">${
+                scores.player1
+            }</span>, Blue: <span class="player2Color">${
+                scores.player2
+            }</span>) Player <span class="player${
+                this.game.currentPlayer
+            }Color">${
+                this.game.currentPlayer
+            }</span>'s turn.`;
         }
     }
 }
