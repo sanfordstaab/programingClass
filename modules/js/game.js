@@ -43,9 +43,9 @@ export class Game {
         // Store current player before potentially changing it
         const moveMadeBy = this.currentPlayer;
         
-        if (!boxesCompleted) {
-            this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
-        }
+        // Switch players unless a box was completed
+        // Remove the condition - always switch players after a move
+        this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
 
         this.checkGameOver();
         return moveMadeBy; // Return which player made the move
