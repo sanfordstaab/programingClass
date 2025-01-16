@@ -1,12 +1,24 @@
 // UI handling module
 
+/**
+ * Handles all UI interactions and rendering for the game
+ * @class
+ */
 export class UI {
+    /**
+     * Creates a new UI instance
+     * @param {HTMLElement} container - The container element for the game grid
+     * @param {Game} game - The game instance to handle UI for
+     */
     constructor(container, game) {
         this.container = container;
         this.game = game;
         this.setupGrid();
     }
 
+    /**
+     * Sets up the initial game grid with all necessary elements
+     */
     setupGrid() {
         const size = this.game.size;
         this.container.style.gridTemplateColumns = `repeat(${2 * size + 1}, auto)`;
@@ -47,6 +59,10 @@ export class UI {
         }
     }
 
+    /**
+     * Handles click events on line elements
+     * @param {HTMLElement} element - The clicked line element
+     */
     handleLineClick(element) {
         const type = element.dataset.type;
         const index = parseInt(element.dataset.index);
@@ -58,6 +74,9 @@ export class UI {
         }
     }
 
+    /**
+     * Updates the visual state of all boxes based on game state
+     */
     updateBoxes() {
         const boxes = this.container.querySelectorAll('.box');
         boxes.forEach(box => {
@@ -71,6 +90,9 @@ export class UI {
         });
     }
 
+    /**
+     * Updates the game status display with current scores and turn information
+     */
     updateStatus() {
         const status = document.getElementById('status');
         const scores = this.game.getScores();
