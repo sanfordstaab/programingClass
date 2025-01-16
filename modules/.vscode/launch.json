@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against Live Server",
+            "url": "http://localhost:5500/modules/index.html",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
