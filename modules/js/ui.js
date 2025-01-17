@@ -21,8 +21,15 @@ export class UI {
      */
     setupGrid() {
         const size = this.game.size;
-        this.container.style.gridTemplateColumns = `repeat(${2 * size + 1}, auto)`;
         this.container.innerHTML = '';
+        
+        // Ensure grid layout is properly set
+        this.container.style.display = 'grid';
+        this.container.style.gap = '2px';
+        this.container.style.gridTemplateColumns = `repeat(${2 * size + 1}, auto)`;
+        
+        // For debugging
+        console.log('Setting up grid with size:', size);
 
         // Create grid elements
         for (let row = 0; row <= 2 * size; row++) {
@@ -32,6 +39,8 @@ export class UI {
                 if (row % 2 === 0 && col % 2 === 0) {
                     // Dots
                     element.className = 'dot';
+                    element.style.width = '10px';
+                    element.style.height = '10px';
                 } else if (row % 2 === 0 && col % 2 === 1) {
                     // Horizontal lines
                     element.className = 'line horizontal-line';
