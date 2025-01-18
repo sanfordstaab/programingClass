@@ -28,7 +28,7 @@ export class UI {
         
         // Ensure grid layout is properly set
         this.container.style.display = 'grid';
-        this.container.style.gap = '2px';
+        this.container.style.gap = '0';
         this.container.style.gridTemplateColumns = `repeat(${2 * width + 1}, auto)`;
         
         // For debugging
