@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Increment</title>
+    <style type="css">
+        body {
+            background-color: blanchedalmond    ;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="eh_count();">
+        Increment the number
+    </button>
+    <span id="num">0</span>
+
+    <!-- code -->
+    <script type="text/javascript">
+        function eh_count(event) {
+            const el = document.getElementById('num');
+            let n = Number(el.innerText);
+            n++;
+            el.innerText = n;
+        }
+    </script>
+</body>
+</html>
