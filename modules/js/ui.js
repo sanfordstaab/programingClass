@@ -116,10 +116,11 @@ export class UI {
         const text = await file.text();
         const moves = JSON.parse(text);
         
-        // Reset game
+        // Reset game and UI state
         this.game.reset();
         this.moveHistory = [];
         this.setupGrid();
+        this.updateStatus(); // Update the status display to show initial state
         
         // Play moves with delay
         let i = 0;
@@ -152,13 +153,7 @@ export class UI {
         const boxes = this.container.querySelectorAll('.box');
         for (let index = 0; index < boxes.length; index++) {
             const box = boxes[index];
-            const owner = this.game.boxes[index];
-            
-            console.log(`Checking box ${index}:`, {
-                boxElement: box,
-                owner: this.game.boxes[index]
-            });
-            
+            const owner = this.game.boxes[index];            
             if (owner === 1) {
                 box.className = 'box player1';
                 console.log(`box ${index} is owned by player 1`);

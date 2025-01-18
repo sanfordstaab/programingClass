@@ -38,14 +38,17 @@ export class Game {
         if (lines[index]) return false;
 
         lines[index] = true;
+        this.lastMoveIndex = index;  // Track the last move
+        this.lastMoveType = lineType;  // Track the type of move
         const boxesCompleted = this.checkBoxes();
         
         // Store current player before potentially changing it
         const moveMadeBy = this.currentPlayer;
         
-        // Switch players unless a box was completed
-        // Remove the condition - always switch players after a move
-        this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
+        // Only switch players if no boxes were completed
+        if (!boxesCompleted) {
+            this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
+        }
 
         this.checkGameOver();
         return moveMadeBy; // Return which player made the move
@@ -58,15 +61,32 @@ export class Game {
     checkBoxes() {
         let boxesCompleted = false;
         
-        // For horizontal lines, check boxes above and below
-        // For vertical lines, check boxes left and right
-        for (let row = 0; row < this.size; row++) {
-            for (let col = 0; col < this.size; col++) {
-                const boxIndex = row * this.size + col;
-                if (this.boxes[boxIndex] === 0 && this.isBoxComplete(row, col)) {
-                    this.boxes[boxIndex] = this.currentPlayer;
-                    boxesCompleted = true;
-                }
+        // Calculate which boxes to check based on the last move
+        const row = Math.floor(this.lastMoveIndex / this.size);
+        const col = this.lastMoveIndex % this.size;
+        
+        // For horizontal lines at row R, check boxes at (R-1,col) and (R,col)
+        // For vertical lines at col C, check boxes at (row,C-1) and (row,C)
+        const boxesToCheck = [];
+        // For horizontal lines
+        if (this.lastMoveType === 'horizontal') {
+            // Check box above the line (if not top row)
+            if (row > 0) boxesToCheck.push({row: row-1, col});
+            // Check box below the line (if not bottom row)
+            if (row < this.size) boxesToCheck.push({row, col});
+        } else {
+            // For vertical lines
+            // Check box to the left of the line (if not leftmost)
+            if (col > 0) boxesToCheck.push({row, col: col-1});
+            // Check box to the right of the line (if not rightmost)
+            if (col < this.size) boxesToCheck.push({row, col});
+        }
+        
+        for (const box of boxesToCheck) {
+            const boxIndex = box.row * this.size + box.col;
+            if (this.boxes[boxIndex] === 0 && this.isBoxComplete(box.row, box.col)) {
+                this.boxes[boxIndex] = this.currentPlayer;
+                boxesCompleted = true;
             }
         }
 
@@ -80,10 +100,6 @@ export class Game {
      * @returns {boolean} True if the box is complete, false otherwise
      */
     isBoxComplete(row, col) {
-        // Calculate indices for the four lines around this box
-        // For a box at (row,col), we need:
-        // - horizontal lines: row*(size) + col for top, (row+1)*(size) + col for bottom
-        // - vertical lines: row*(size+1) + col for left, row*(size+1) + (col+1) for right
         const topIndex = row * (this.size) + col;
         const bottomIndex = (row + 1) * (this.size) + col;
         const leftIndex = row * (this.size + 1) + col;
@@ -95,21 +111,12 @@ export class Game {
         const left = this.verticalLines[leftIndex];
         const right = this.verticalLines[rightIndex];
 
-        // For debugging
-        console.log(`Box (${row},${col}):`, {
-            topIndex,
-            bottomIndex,
-            leftIndex,
-            rightIndex,
-            top,
-            bottom,
-            left,
-            right,
-            horizontalLines: this.horizontalLines,
-            verticalLines: this.verticalLines
-        });
+        const fIsComplete = (top && bottom && left && right);
+        if (fIsComplete) {
+            console.log(`Box (${row}, ${col}) is now complete.`);
+        }
 
-        return top && bottom && left && right;
+        return fIsComplete;
     }
 
     /**
