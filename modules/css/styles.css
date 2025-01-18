@@ -43,16 +43,18 @@
     background: #0088ff;
 }
 .horizontal-line {
-    height: 4px;
+    height: 6px;
     width: 25px;
 }
 .vertical-line {
-    width: 4px;
+    width: 6px;
     height: 25px;
 }
 .box {
     width: 25px;
     height: 25px;
+    position: relative;
+    left: -2px;
 }
 .box.player1 {
     background: #ff0000;
