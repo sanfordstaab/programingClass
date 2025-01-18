@@ -13,7 +13,9 @@ export class UI {
     constructor(container, game) {
         this.container = container;
         this.game = game;
+        this.moveHistory = [];
         this.setupGrid();
+        this.setupDebugControls();
     }
 
     /**
@@ -79,9 +81,68 @@ export class UI {
         const moveMadeBy = this.game.makeMove(type, index);
         if (moveMadeBy) { // moveMadeBy will be false if move was invalid, or 1 or 2 for the player number
             element.classList.add(`player${moveMadeBy}`);
+            this.moveHistory.push({ type, index });
             this.updateBoxes();
             this.updateStatus();
         }
+    }
+
+    setupDebugControls() {
+        const saveButton = document.getElementById('saveGame');
+        const loadButton = document.getElementById('loadGame');
+        const loadFile = document.getElementById('loadFile');
+
+        saveButton.addEventListener('click', () => this.saveGame());
+        loadButton.addEventListener('click', () => loadFile.click());
+        loadFile.addEventListener('change', (e) => this.loadGame(e.target.files[0]));
+    }
+
+    saveGame() {
+        const data = JSON.stringify(this.moveHistory);
+        const blob = new Blob([data], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'game.dnb';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    async loadGame(file) {
+        if (!file) return;
+        
+        const text = await file.text();
+        const moves = JSON.parse(text);
+        
+        // Reset game
+        this.game.reset();
+        this.moveHistory = [];
+        this.setupGrid();
+        
+        // Play moves with delay
+        let i = 0;
+        const playMove = () => {
+            if (i >= moves.length) return;
+            
+            const move = moves[i];
+            const element = this.findLineElement(move.type, move.index);
+            if (element) {
+                this.handleLineClick(element);
+            }
+            
+            i++;
+            setTimeout(playMove, 500); // 500ms = 1/2 second
+        };
+        
+        playMove();
+    }
+
+    findLineElement(type, index) {
+        return this.container.querySelector(
+            `.line[data-type="${type}"][data-index="${index}"]`
+        );
     }
 
     /**

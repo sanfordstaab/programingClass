@@ -74,3 +74,13 @@
 .player2Color {
     color: #0088ff;
 }
+
+.debug-controls {
+    margin-top: 20px;
+}
+
+.debug-controls button {
+    margin: 0 10px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
