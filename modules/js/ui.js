@@ -158,10 +158,8 @@ export class UI {
             const owner = this.game.boxes[y][x];
             if (owner === 1) {
                 box.className = 'box player1';
-                console.log(`box (${x}, ${y}) is owned by player 1`);
             } else if (owner === 2) {
                 box.className = 'box player2';
-                console.log(`box (${x}, ${y}) is owned by player 2`);
             } else {
                 box.className = 'box';
             }
@@ -181,23 +179,19 @@ export class UI {
         if (this.game.gameOver) {
             const winner = this.game.getWinner();
             if (winner === 0) {
-                status.textContent = `Game Over! It's a tie! (${scores.player1} - ${scores.player2})`;
+                status.innerHTML = `Game Over! It's a tie! (Red: <span class="player1Color">${scores.player1}</span>, Blue: <span class="player2Color">${scores.player2}</span>)`;
             } else {
-                status.textContent = `Game Over! Player ${winner} wins! (${scores.player1} - ${scores.player2})`;
+                const winnerName = winner === 1 ? '<span class="player1Color">Red</span>' : '<span class="player2Color">Blue</span>';
+                status.innerHTML = `Game Over! ${winnerName} wins! (Red: <span class="player1Color">${scores.player1}</span>, Blue: <span class="player2Color">${scores.player2}</span>)`;
                 status.classList.add(`player${winner}`);
             }
         } else {
-            status.innerHTML = `Player ${
-                this.game.currentPlayer
-            }'s turn (Red: <span class="player1Color">${
+            const currentPlayerName = this.game.currentPlayer === 1 ? '<span class="player1Color">Red</span>' : '<span class="player2Color">Blue</span>';
+            status.innerHTML = `${currentPlayerName}'s turn (Red: <span class="player1Color">${
                 scores.player1
             }</span>, Blue: <span class="player2Color">${
                 scores.player2
-            }</span>) Player <span class="player${
-                this.game.currentPlayer
-            }Color">${
-                this.game.currentPlayer
-            }</span>'s turn.`;
+            }</span>)`;
         }
     }
 }
