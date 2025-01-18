@@ -19,9 +19,13 @@ export class Game {
      */
     reset() {
         this.currentPlayer = 1;
-        this.horizontalLines = Array(this.size * (this.size + 1)).fill(false);
-        this.verticalLines = Array((this.size + 1) * this.size).fill(false);
-        this.boxes = Array(this.size * this.size).fill(0);
+        // Store lines in 2D arrays for easier coordinate access
+        this.horizontalLines = Array(this.size + 1).fill(null)
+            .map(() => Array(this.size).fill(false));
+        this.verticalLines = Array(this.size).fill(null)
+            .map(() => Array(this.size + 1).fill(false));
+        this.boxes = Array(this.size).fill(null)
+            .map(() => Array(this.size).fill(0));
         this.gameOver = false;
     }
 
@@ -31,15 +35,16 @@ export class Game {
      * @param {number} index - Index of the line in its respective array
      * @returns {boolean} True if the move was valid and made, false otherwise
      */
-    makeMove(lineType, index) {
+    makeMove(lineType, x, y) {
         if (this.gameOver) return false;
         
         const lines = lineType === 'horizontal' ? this.horizontalLines : this.verticalLines;
-        if (lines[index]) return false;
+        if (lines[y][x]) return false;
 
-        lines[index] = true;
-        this.lastMoveIndex = index;  // Track the last move
-        this.lastMoveType = lineType;  // Track the type of move
+        lines[y][x] = true;
+        this.lastMoveX = x;  // Track the last move
+        this.lastMoveY = y;
+        this.lastMoveType = lineType;
         const boxesCompleted = this.checkBoxes();
         
         // Store current player before potentially changing it
@@ -61,31 +66,25 @@ export class Game {
     checkBoxes() {
         let boxesCompleted = false;
         
-        // Calculate which boxes to check based on the last move
-        const row = Math.floor(this.lastMoveIndex / this.size);
-        const col = this.lastMoveIndex % this.size;
-        
-        // For horizontal lines at row R, check boxes at (R-1,col) and (R,col)
-        // For vertical lines at col C, check boxes at (row,C-1) and (row,C)
+        // For horizontal lines at y, check boxes at (y-1) and y
+        // For vertical lines at x, check boxes at (x-1) and x
         const boxesToCheck = [];
-        // For horizontal lines
+        
         if (this.lastMoveType === 'horizontal') {
-            // Check box above the line (if not top row)
-            if (row > 0) boxesToCheck.push({row: row-1, col});
-            // Check box below the line (if not bottom row)
-            if (row < this.size) boxesToCheck.push({row, col});
+            const y = this.lastMoveY;
+            const x = this.lastMoveX;
+            if (y > 0) boxesToCheck.push({x, y: y-1});
+            if (y < this.size) boxesToCheck.push({x, y});
         } else {
-            // For vertical lines
-            // Check box to the left of the line (if not leftmost)
-            if (col > 0) boxesToCheck.push({row, col: col-1});
-            // Check box to the right of the line (if not rightmost)
-            if (col < this.size) boxesToCheck.push({row, col});
+            const x = this.lastMoveX;
+            const y = this.lastMoveY;
+            if (x > 0) boxesToCheck.push({x: x-1, y});
+            if (x < this.size) boxesToCheck.push({x, y});
         }
         
         for (const box of boxesToCheck) {
-            const boxIndex = box.row * this.size + box.col;
-            if (this.boxes[boxIndex] === 0 && this.isBoxComplete(box.row, box.col)) {
-                this.boxes[boxIndex] = this.currentPlayer;
+            if (this.boxes[box.y][box.x] === 0 && this.isBoxComplete(box.x, box.y)) {
+                this.boxes[box.y][box.x] = this.currentPlayer;
                 boxesCompleted = true;
             }
         }
@@ -99,21 +98,16 @@ export class Game {
      * @param {number} col - Column index of the box
      * @returns {boolean} True if the box is complete, false otherwise
      */
-    isBoxComplete(row, col) {
-        const topIndex = row * (this.size) + col;
-        const bottomIndex = (row + 1) * (this.size) + col;
-        const leftIndex = row * (this.size + 1) + col;
-        const rightIndex = row * (this.size + 1) + (col + 1);
-
+    isBoxComplete(x, y) {
         // Check if all four lines around the box are drawn
-        const top = this.horizontalLines[topIndex];
-        const bottom = this.horizontalLines[bottomIndex];
-        const left = this.verticalLines[leftIndex];
-        const right = this.verticalLines[rightIndex];
+        const top = this.horizontalLines[y][x];
+        const bottom = this.horizontalLines[y + 1][x];
+        const left = this.verticalLines[y][x];
+        const right = this.verticalLines[y][x + 1];
 
         const fIsComplete = (top && bottom && left && right);
         if (fIsComplete) {
-            console.log(`Box (${row}, ${col}) is now complete.`);
+            console.log(`Box (${x}, ${y}) is now complete.`);
         }
 
         return fIsComplete;
@@ -123,7 +117,7 @@ export class Game {
      * Checks if the game is over
      */
     checkGameOver() {
-        this.gameOver = this.boxes.every(box => box !== 0);
+        this.gameOver = this.boxes.every(row => row.every(box => box !== 0));
     }
 
     /**
@@ -131,10 +125,14 @@ export class Game {
      * @returns {{player1: number, player2: number}} Object containing scores for both players
      */
     getScores() {
-        return {
-            player1: this.boxes.filter(box => box === 1).length,
-            player2: this.boxes.filter(box => box === 2).length
-        };
+        let player1 = 0, player2 = 0;
+        for (let y = 0; y < this.size; y++) {
+            for (let x = 0; x < this.size; x++) {
+                if (this.boxes[y][x] === 1) player1++;
+                else if (this.boxes[y][x] === 2) player2++;
+            }
+        }
+        return { player1, player2 };
     }
 
     /**

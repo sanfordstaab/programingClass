@@ -46,23 +46,22 @@ export class UI {
                 } else if (row % 2 === 0 && col % 2 === 1) {
                     // Horizontal lines
                     element.className = 'line horizontal-line';
-                    const index = (row / 2) * size + Math.floor(col / 2);
                     element.dataset.type = 'horizontal';
-                    element.dataset.index = index;
+                    element.dataset.x = Math.floor(col / 2);
+                    element.dataset.y = row / 2;
                     element.addEventListener('click', () => this.handleLineClick(element));
                 } else if (row % 2 === 1 && col % 2 === 0) {
                     // Vertical lines
                     element.className = 'line vertical-line';
-                    const index = Math.floor(row / 2) * size + (col / 2);
                     element.dataset.type = 'vertical';
-                    element.dataset.index = index;
+                    element.dataset.x = col / 2;
+                    element.dataset.y = Math.floor(row / 2);
                     element.addEventListener('click', () => this.handleLineClick(element));
                 } else {
                     // Box spaces
                     element.className = 'box';
-                    const boxRow = Math.floor(row / 2);
-                    const boxCol = Math.floor(col / 2);
-                    element.dataset.box = boxRow * size + boxCol;
+                    element.dataset.x = Math.floor(col / 2);
+                    element.dataset.y = Math.floor(row / 2);
                 }
 
                 this.container.appendChild(element);
@@ -76,9 +75,10 @@ export class UI {
      */
     handleLineClick(element) {
         const type = element.dataset.type;
-        const index = parseInt(element.dataset.index);
+        const x = parseInt(element.dataset.x);
+        const y = parseInt(element.dataset.y);
         
-        const moveMadeBy = this.game.makeMove(type, index);
+        const moveMadeBy = this.game.makeMove(type, x, y);
         if (moveMadeBy) { // moveMadeBy will be false if move was invalid, or 1 or 2 for the player number
             element.classList.add(`player${moveMadeBy}`);
             this.moveHistory.push({ type, index });
