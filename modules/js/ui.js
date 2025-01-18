@@ -22,20 +22,21 @@ export class UI {
      * Sets up the initial game grid with all necessary elements
      */
     setupGrid() {
-        const size = this.game.size;
+        const width = this.game.width;
+        const height = this.game.height;
         this.container.innerHTML = '';
         
         // Ensure grid layout is properly set
         this.container.style.display = 'grid';
         this.container.style.gap = '2px';
-        this.container.style.gridTemplateColumns = `repeat(${2 * size + 1}, auto)`;
+        this.container.style.gridTemplateColumns = `repeat(${2 * width + 1}, auto)`;
         
         // For debugging
-        console.log('Setting up grid with size:', size);
+        console.log('Setting up grid with dimensions:', width, 'x', height);
 
         // Create grid elements
-        for (let row = 0; row <= 2 * size; row++) {
-            for (let col = 0; col <= 2 * size; col++) {
+        for (let row = 0; row <= 2 * height; row++) {
+            for (let col = 0; col <= 2 * width; col++) {
                 const element = document.createElement('div');
 
                 if (row % 2 === 0 && col % 2 === 0) {

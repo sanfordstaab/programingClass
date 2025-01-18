@@ -7,10 +7,12 @@
 export class Game {
     /**
      * Creates a new game instance
-     * @param {number} [size=3] - The size of the game grid (size x size)
+     * @param {number} [width=3] - The width of the game grid
+     * @param {number} [height=3] - The height of the game grid
      */
-    constructor(size = 3) {
-        this.size = size;
+    constructor(width = 3, height = 3) {
+        this.width = width;
+        this.height = height;
         this.reset();
     }
 
@@ -25,10 +27,10 @@ export class Game {
         const boxes = [];
         if (lineType === 'horizontal') {
             if (y > 0) boxes.push({x, y: y-1}); // Box above
-            if (y < this.size) boxes.push({x, y}); // Box below
+            if (y < this.height) boxes.push({x, y}); // Box below
         } else {
             if (x > 0) boxes.push({x: x-1, y}); // Box to left
-            if (x < this.size) boxes.push({x, y}); // Box to right
+            if (x < this.width) boxes.push({x, y}); // Box to right
         }
         return boxes;
     }
@@ -59,12 +61,12 @@ export class Game {
     reset() {
         this.currentPlayer = 1;
         // Store lines in 2D arrays for easier coordinate access
-        this.horizontalLines = Array(this.size + 1).fill(null)
-            .map(() => Array(this.size).fill(false));
-        this.verticalLines = Array(this.size).fill(null)
-            .map(() => Array(this.size + 1).fill(false));
-        this.boxes = Array(this.size).fill(null)
-            .map(() => Array(this.size).fill(0));
+        this.horizontalLines = Array(this.height + 1).fill(null)
+            .map(() => Array(this.width).fill(false));
+        this.verticalLines = Array(this.height).fill(null)
+            .map(() => Array(this.width + 1).fill(false));
+        this.boxes = Array(this.height).fill(null)
+            .map(() => Array(this.width).fill(0));
         this.gameOver = false;
     }
 
@@ -152,8 +154,8 @@ export class Game {
      */
     getScores() {
         let player1 = 0, player2 = 0;
-        for (let y = 0; y < this.size; y++) {
-            for (let x = 0; x < this.size; x++) {
+        for (let y = 0; y < this.height; y++) {
+            for (let x = 0; x < this.width; x++) {
                 if (this.boxes[y][x] === 1) player1++;
                 else if (this.boxes[y][x] === 2) player2++;
             }
