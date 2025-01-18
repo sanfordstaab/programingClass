@@ -81,7 +81,7 @@ export class UI {
         const moveMadeBy = this.game.makeMove(type, x, y);
         if (moveMadeBy) { // moveMadeBy will be false if move was invalid, or 1 or 2 for the player number
             element.classList.add(`player${moveMadeBy}`);
-            this.moveHistory.push({ type, index });
+            this.moveHistory.push({ type, x, y });
             this.updateBoxes();
             this.updateStatus();
         }
@@ -151,19 +151,20 @@ export class UI {
      */
     updateBoxes() {
         const boxes = this.container.querySelectorAll('.box');
-        for (let index = 0; index < boxes.length; index++) {
-            const box = boxes[index];
-            const owner = this.game.boxes[index];            
+        boxes.forEach(box => {
+            const x = parseInt(box.dataset.x);
+            const y = parseInt(box.dataset.y);
+            const owner = this.game.boxes[y][x];
             if (owner === 1) {
                 box.className = 'box player1';
-                console.log(`box ${index} is owned by player 1`);
+                console.log(`box (${x}, ${y}) is owned by player 1`);
             } else if (owner === 2) {
                 box.className = 'box player2';
-                console.log(`box ${index} is owned by player 2`);
+                console.log(`box (${x}, ${y}) is owned by player 2`);
             } else {
                 box.className = 'box';
             }
-        };
+        });
     }
 
     /**
