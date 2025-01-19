@@ -11,14 +11,22 @@
         <h1>Dots and Boxes</h1>
         <div class="controls">
             <button id="newGame">New Game</button>
-            <select id="gridSize">
-                <option value="3">3x3</option>
-                <option value="4">4x4</option>
-                <option value="5">5x5</option>
+            <label for="gridWidth">Width:</label>
+            <select id="gridWidth">
+                <!-- filled in by code in body.onload event listener -->
+            </select>
+            <label for="gridHeight">Height:</label>
+            <select id="gridHeight">
+                <!-- filled in by code in body.onload event listener -->
             </select>
         </div>
         <div id="status"></div>
         <div id="grid" class="grid"><!-- Grid will be populated by JavaScript --></div>
+        <div class="debug-controls">
+            <button id="saveGame">Save</button>
+            <button id="loadGame">Load</button>
+            <input type="file" id="loadFile" accept=".dnb" style="display: none;">
+        </div>
     </div>
     <script type="module" src="js/main.js"></script>
 </body>

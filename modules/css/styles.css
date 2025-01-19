@@ -6,22 +6,28 @@
 }
 .grid {
     display: grid;
-    gap: 2px;
+    gap: 0;
     margin: 20px;
     justify-content: center;
     align-items: center;
     min-width: 300px;
-    min-height: 300px;
     border: 1px solid #ccc;
     padding: 20px;
+    font-size: 0; /* Remove whitespace between inline elements */
+    line-height: 0; /* Remove extra vertical spacing */
+    grid-gap: 0; /* Older browsers */
+    row-gap: 0; /* Explicit row gap */
+    column-gap: 0; /* Explicit column gap */
 }
 .dot {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
     background: black;
     border-radius: 50%;
-    margin: auto;
     display: block;
+    position: relative;
+    left: -3px;
+    top: -1px;
 }
 .line {
     background: #ddd;
@@ -37,16 +43,18 @@
     background: #0088ff;
 }
 .horizontal-line {
-    height: 8px;
-    width: 50px;
+    height: 6px;
+    width: 25px;
 }
 .vertical-line {
-    width: 8px;
-    height: 50px;
+    width: 6px;
+    height: 25px;
 }
 .box {
-    width: 50px;
-    height: 50px;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    left: -2px;
 }
 .box.player1 {
     background: #ff0000;
@@ -73,4 +81,14 @@
 }
 .player2Color {
     color: #0088ff;
+}
+
+.debug-controls {
+    margin-top: 20px;
+}
+
+.debug-controls button {
+    margin: 0 10px;
+    padding: 5px 15px;
+    cursor: pointer;
 }
